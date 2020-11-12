@@ -10,7 +10,6 @@ import Axios from 'axios';
 require('./bootstrap');
 
 window.Vue = require('vue');
-// window.api = require('./api').default;
 window.swal = require('sweetalert2');
 
 Vue.config.productionTip = false;

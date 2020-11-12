@@ -53,29 +53,30 @@
 </template>
 
 <script>
+import {getScoresDetail} from "../userAPI";
+
 export default {
-    mounted() {
-        axios.post('/api/users/getScoresDetail', {
+    async mounted() {
+        let data = await getScoresDetail({
             id: this.$route.params.id,
             userId: this.$store.getters.getUser.id,
             token: this.$store.getters.getUser.token,
-        })
-            .then(res => {
-                if (res.data.status) {
-                    this.$store.dispatch('setQuestions', res.data.data)
-                } else {
-                    swal.fire({
-                        title: "Message",
-                        text: res.data.msg,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                    })
-                        .then(() => {
-                            this.$router.push('/Scores');
-                        });
-                }
-            });
+        });
+
+        if (data.status) {
+            await this.$store.dispatch('setQuestions', data.data)
+        } else {
+            swal.fire({
+                title: "Message",
+                text: data.msg,
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+            })
+                .then(() => {
+                    this.$router.push('/Scores');
+                });
+        }
     },
     data() {
         return {
@@ -102,7 +103,7 @@ export default {
                 this.currentIndex++;
             }
         },
-        exitService(){
+        exitService() {
             this.$router.push('/Scores');
         }
     }

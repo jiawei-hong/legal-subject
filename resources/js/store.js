@@ -2,8 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
-import api from './api';
-import { getUserScores } from './userAPI';
+import { getUserScores,getCategories,getSchoolYear,getSchoolYearQuestions } from './userAPI';
 
 Vue.use(Vuex);
 
@@ -45,20 +44,24 @@ export default new Vuex.Store({
         logout({commit}){
             commit('logout');
         },
-        getSchoolYear({commit},token){
-            api.getSchoolYear(token).then(res => {
-                commit('setSchoolYear',res);
-            });
+        async getSchoolYear({commit}){
+            let data = await getSchoolYear();
+
+            commit('setSchoolYear',data);
         },
-        getViewSchoolYearData({commit},id){
-            api.getSchoolYearQuestions(id).then(res => {
-                commit('setViewSchoolYearData',res);
-            })
-        },
-        getCategories({commit}){
-            api.getCategories().then(res => {
-                commit('setCategories',res);
+        async getViewSchoolYearData({commit},id){
+            let data = getSchoolYearQuestions({
+                params:{
+                    id:id
+                }
             });
+
+            commit('setViewSchoolYearData',data);
+        },
+        async getCategories({commit}){
+            let data = await getCategories();
+
+            commit('setCategories',data);
         },
         async getScores({commit},data){
             let scoresData = await getUserScores(data);

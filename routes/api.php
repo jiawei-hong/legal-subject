@@ -26,6 +26,10 @@ Route::namespace('api')->group(function(){
         Route::post('createUsers','ApiController@createUsers');
     });
 
+    Route::middleware('admin')->prefix('admin')->group(function(){
+        Route::post('switchSchoolYear','ApiController@switchSchoolYear');
+    });
+
     Route::middleware('student')->prefix('users')->group(function(){
         Route::post('getScoresDetail','ApiController@getScoresDetail');
         Route::post('getScoresCount','ApiController@getScoresCount');

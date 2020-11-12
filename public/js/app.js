@@ -2077,7 +2077,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_api__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _userAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../userAPI */ "./resources/js/userAPI.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2170,6 +2180,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2184,22 +2195,47 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    this.$store.dispatch("getSchoolYear");
-    this.$store.dispatch("getCategories");
-    var token = this.$store.getters.getUser.length == 0 ? "" : this.$store.getters.getUser.token;
-    _api__WEBPACK_IMPORTED_MODULE_0__["default"].getCheckPermission(token).then(function (res) {
-      if (res == null || res !== "學生") {
-        swal.fire({
-          title: "Message",
-          text: "無權訪問。",
-          timer: 2000,
-          timerProgressBar: true,
-          showConfirmButton: false
-        }).then(function () {
-          _this.$router.push("/");
-        });
-      }
-    });
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var token, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              token = _this.$store.getters.getUser.length === 0 ? "" : _this.$store.getters.getUser.token;
+              _context.next = 3;
+              return Object(_userAPI__WEBPACK_IMPORTED_MODULE_2__["checkPermission"])({
+                token: token
+              });
+
+            case 3:
+              data = _context.sent;
+
+              if (data === null) {
+                swal.fire({
+                  title: "Message",
+                  text: "無權訪問。",
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                }).then(function () {
+                  _this.$router.push("/");
+                });
+              }
+
+              _context.next = 7;
+              return _this.$store.dispatch("getSchoolYear");
+
+            case 7:
+              _context.next = 9;
+              return _this.$store.dispatch("getCategories");
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   computed: {
     schoolYear: function schoolYear() {
@@ -2211,7 +2247,7 @@ __webpack_require__.r(__webpack_exports__);
         data = data.filter(function (d) {
           return d.isOpen && !d.isFinish;
         });
-        this.schoolYearId = data[0] == undefined ? 0 : data[0].id;
+        this.schoolYearId = data[0] === undefined ? 0 : data[0].id;
       }
 
       return data;
@@ -2222,7 +2258,7 @@ __webpack_require__.r(__webpack_exports__);
       if (data == null) {
         return [];
       } else if (data.length > 0) {
-        this.categoryId = data[0] == undefined ? 0 : data[0].id;
+        this.categoryId = data[0] === undefined ? 0 : data[0].id;
       }
 
       return data;
@@ -2422,6 +2458,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_api__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2654,7 +2691,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
 //
 //
 //
@@ -2701,7 +2737,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2724,7 +2760,7 @@ __webpack_require__.r(__webpack_exports__);
         data = data.filter(function (d) {
           return d.isOpen && !d.isFinish;
         });
-        this.schoolYearId = data[0] == undefined ? 0 : data[0].id;
+        this.schoolYearId = data[0] === undefined ? 0 : data[0].id;
       }
 
       return data;
@@ -2735,7 +2771,7 @@ __webpack_require__.r(__webpack_exports__);
       if (data == null) {
         return [];
       } else if (data.length > 0) {
-        this.categoryId = data[0] == undefined ? 0 : data[0].id;
+        this.categoryId = data[0] === undefined ? 0 : data[0].id;
       }
 
       return data;
@@ -2888,6 +2924,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_api__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _userAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../userAPI */ "./resources/js/userAPI.js");
 
 
@@ -3029,7 +3066,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_api__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _userAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../userAPI */ "./resources/js/userAPI.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3048,30 +3095,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
 
-    var token = this.$store.getters.getUser.length = 0 ? undefined : this.$store.getters.getUser.token;
-    _api__WEBPACK_IMPORTED_MODULE_0__["default"].getCheckPermission(token).then(function (res) {
-      if (res == null || res !== "學生") {
-        swal.fire({
-          title: "Message",
-          text: "無權訪問。",
-          timer: 100,
-          timerProgressBar: true,
-          showConfirmButton: false
-        }).then(function () {
-          _this.$router.push("/");
-        });
-      } else {
-        _this.$store.dispatch("getScores", {
-          id: _this.$store.getters.getUser.id,
-          token: token
-        });
-      }
-    });
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var token, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              token = _this.$store.getters.getUser.length = 0 ? undefined : _this.$store.getters.getUser.token;
+              _context.next = 3;
+              return Object(_userAPI__WEBPACK_IMPORTED_MODULE_2__["checkPermission"])({
+                token: token
+              });
+
+            case 3:
+              data = _context.sent;
+
+              if (!(data === null || data !== '學生')) {
+                _context.next = 8;
+                break;
+              }
+
+              swal.fire({
+                title: "Message",
+                text: "無權訪問。",
+                timer: 100,
+                timerProgressBar: true,
+                showConfirmButton: false
+              }).then(function () {
+                _this.$router.push("/");
+              });
+              _context.next = 10;
+              break;
+
+            case 8:
+              _context.next = 10;
+              return _this.$store.dispatch("getScores", {
+                id: _this.$store.getters.getUser.id,
+                token: token
+              });
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   computed: {
     scores: function scores() {
@@ -3091,6 +3166,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _userAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../userAPI */ "./resources/js/userAPI.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3145,29 +3229,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
 
-    axios.post('/api/users/getScoresDetail', {
-      id: this.$route.params.id,
-      userId: this.$store.getters.getUser.id,
-      token: this.$store.getters.getUser.token
-    }).then(function (res) {
-      if (res.data.status) {
-        _this.$store.dispatch('setQuestions', res.data.data);
-      } else {
-        swal.fire({
-          title: "Message",
-          text: res.data.msg,
-          timer: 3000,
-          timerProgressBar: true,
-          showConfirmButton: false
-        }).then(function () {
-          _this.$router.push('/Scores');
-        });
-      }
-    });
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return Object(_userAPI__WEBPACK_IMPORTED_MODULE_1__["getScoresDetail"])({
+                id: _this.$route.params.id,
+                userId: _this.$store.getters.getUser.id,
+                token: _this.$store.getters.getUser.token
+              });
+
+            case 2:
+              data = _context.sent;
+
+              if (!data.status) {
+                _context.next = 8;
+                break;
+              }
+
+              _context.next = 6;
+              return _this.$store.dispatch('setQuestions', data.data);
+
+            case 6:
+              _context.next = 9;
+              break;
+
+            case 8:
+              swal.fire({
+                title: "Message",
+                text: data.msg,
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+              }).then(function () {
+                _this.$router.push('/Scores');
+              });
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   data: function data() {
     return {
@@ -3211,7 +3323,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_api__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _userAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../userAPI */ "./resources/js/userAPI.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3269,6 +3391,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3300,17 +3426,41 @@ __webpack_require__.r(__webpack_exports__);
     openSchoolYear: function openSchoolYear(id, bool) {
       var _this2 = this;
 
-      var token = this.$store.getters.getUser.token;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].switchSchool(id, bool, token).then(function () {
-        return _this2.$store.dispatch("getSchoolYear", token);
-      });
-      swal.fire({
-        title: "Message",
-        text: "進行操作中，請稍後。",
-        timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var token, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                swal.fire({
+                  position: 'top-end',
+                  icon: 'info',
+                  toast: true,
+                  text: "進行操作中，請稍後。",
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+                token = _this2.$store.getters.getUser.token;
+                _context.next = 4;
+                return Object(_userAPI__WEBPACK_IMPORTED_MODULE_2__["toggleSchoolYear"])({
+                  id: id,
+                  bool: bool,
+                  token: token
+                });
+
+              case 4:
+                data = _context.sent;
+                _context.next = 7;
+                return _this2.$store.dispatch("getSchoolYear", token);
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   }
 });
@@ -3327,6 +3477,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_api__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3391,7 +3542,7 @@ __webpack_require__.r(__webpack_exports__);
     swal.fire({
       title: "Message",
       text: "載入題目中，請稍後。",
-      timer: 3000,
+      timer: 1500,
       timerProgressBar: true,
       showConfirmButton: false
     });
@@ -43082,9 +43233,9 @@ var render = function() {
                   _vm._l(_vm.schoolYear, function(year) {
                     return _c("option", { domProps: { value: year.id } }, [
                       _vm._v(
-                        "\n              " +
+                        "\n                            " +
                           _vm._s(year.year) +
-                          "\n            "
+                          "\n                        "
                       )
                     ])
                   }),
@@ -43127,9 +43278,9 @@ var render = function() {
                   _vm._l(_vm.categories, function(category) {
                     return _c("option", { domProps: { value: category.id } }, [
                       _vm._v(
-                        "\n              " +
+                        "\n                            " +
                           _vm._s(category.name) +
-                          "\n            "
+                          "\n                        "
                       )
                     ])
                   }),
@@ -43143,7 +43294,7 @@ var render = function() {
                   staticClass: "btn btn-primary btn-block",
                   on: { click: _vm.startExam }
                 },
-                [_vm._v("\n          開始測驗\n        ")]
+                [_vm._v("\n                    開始測驗\n                ")]
               )
             ])
           ])
@@ -43163,7 +43314,7 @@ var render = function() {
                 staticClass: "btn btn-primary w-50 mr-2",
                 on: { click: _vm.prevIndex }
               },
-              [_vm._v("\n        上一題\n      ")]
+              [_vm._v("\n                上一題\n            ")]
             ),
             _vm._v(" "),
             _c(
@@ -43172,7 +43323,7 @@ var render = function() {
                 staticClass: "btn btn-primary w-50 mr-2",
                 on: { click: _vm.nextIndex }
               },
-              [_vm._v("\n        下一題\n      ")]
+              [_vm._v("\n                下一題\n            ")]
             ),
             _vm._v(" "),
             _c(
@@ -43181,7 +43332,7 @@ var render = function() {
                 staticClass: "btn btn-primary w-50 mr-2",
                 on: { click: _vm.fillAnswer }
               },
-              [_vm._v("\n        填充答案\n      ")]
+              [_vm._v("\n                填充答案\n            ")]
             )
           ]),
           _vm._v(" "),
@@ -43193,14 +43344,14 @@ var render = function() {
             _c("div", { staticClass: "card-body" }, [
               _c("h5", { staticClass: "card-title" }, [
                 _vm._v(
-                  "\n          " +
+                  "\n                    " +
                     _vm._s(
                       _vm.currentIndex +
                         1 +
                         ". " +
                         _vm.examQuestions.questions[_vm.currentIndex].question
                     ) +
-                    "\n        "
+                    "\n                "
                 )
               ]),
               _vm._v(" "),
@@ -43239,7 +43390,9 @@ var render = function() {
                       }
                     }),
                     _vm._v(
-                      "\n            " + _vm._s(item.value) + "\n          "
+                      "\n                        " +
+                        _vm._s(item.value) +
+                        "\n                    "
                     )
                   ])
                 }),
@@ -43254,7 +43407,7 @@ var render = function() {
                   staticClass: "btn btn-primary btn-block mt-3",
                   on: { click: _vm.judgeAnswer }
                 },
-                [_vm._v("\n          結束測驗\n        ")]
+                [_vm._v("\n                    結束測驗\n                ")]
               )
             ])
           ])
@@ -43587,9 +43740,9 @@ var render = function() {
                     _vm._l(_vm.schoolYear, function(year) {
                       return _c("option", { domProps: { value: year.id } }, [
                         _vm._v(
-                          "\n              " +
+                          "\n                            " +
                             _vm._s(year.year) +
-                            "\n            "
+                            "\n                        "
                         )
                       ])
                     }),
@@ -43637,9 +43790,9 @@ var render = function() {
                         { domProps: { value: category.id } },
                         [
                           _vm._v(
-                            "\n              " +
+                            "\n                            " +
                               _vm._s(category.name) +
-                              "\n            "
+                              "\n                        "
                           )
                         ]
                       )
@@ -43654,7 +43807,7 @@ var render = function() {
                     staticClass: "btn btn-primary btn-block",
                     attrs: { to: "/view/SchoolYear/" + _vm.schoolYearId }
                   },
-                  [_vm._v("查看題庫")]
+                  [_vm._v("查看題庫\n                ")]
                 )
               ],
               1
@@ -44211,7 +44364,7 @@ var render = function() {
           staticClass: "btn btn-primary btn-block",
           on: { click: _vm.redirectToCreateSchoolYear }
         },
-        [_vm._v("\n      新增學年度\n    ")]
+        [_vm._v("\n            新增學年度\n        ")]
       )
     ]),
     _vm._v(" "),
@@ -44223,7 +44376,11 @@ var render = function() {
             _vm._l(_vm.schoolYear, function(item) {
               return _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header text-center" }, [
-                  _vm._v("\n          " + _vm._s(item.year) + "\n        ")
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(item.year) +
+                      "\n                "
+                  )
                 ]),
                 _vm._v(" "),
                 _c(
@@ -44243,9 +44400,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n            " +
+                          "\n                        " +
                             _vm._s(!item.isOpen ? "開啟" : "關閉") +
-                            "\n          "
+                            "\n                    "
                         )
                       ]
                     ),
@@ -44256,7 +44413,7 @@ var render = function() {
                         staticClass: "btn btn-primary btn-block",
                         attrs: { to: "/view/SchoolYear/" + item.id }
                       },
-                      [_vm._v("查看題庫")]
+                      [_vm._v("查看題庫\n                    ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -44265,7 +44422,7 @@ var render = function() {
                         staticClass: "btn btn-primary btn-block",
                         attrs: { to: "/view/FullMarks/" + item.id }
                       },
-                      [_vm._v("查看滿分")]
+                      [_vm._v("查看滿分\n                    ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -44274,7 +44431,7 @@ var render = function() {
                         staticClass: "btn btn-primary btn-block",
                         attrs: { to: "/view/Finish/" + item.id }
                       },
-                      [_vm._v("查看結果")]
+                      [_vm._v("查看結果\n                    ")]
                     )
                   ],
                   1
@@ -60923,55 +61080,10 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/api.js ***!
   \*****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  getSchoolYear: function getSchoolYear(token) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/getSchoolYear', {
-      params: {
-        token: token
-      }
-    }).then(function (res) {
-      if (res.status) return res.data;
-    });
-  },
-  switchSchool: function switchSchool(id, bool, token) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/switchSchoolYear', {
-      id: id,
-      bool: bool,
-      token: token
-    }).then(function (res) {
-      if (res.status) return res.data;
-    });
-  },
-  getSchoolYearQuestions: function getSchoolYearQuestions(id) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/getSchoolYearQuestions', {
-      params: {
-        id: id
-      }
-    }).then(function (res) {
-      if (res.status) return res.data;
-    });
-  },
-  getCategories: function getCategories() {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/getCategories').then(function (res) {
-      if (res.status) return res.data;
-    });
-  },
-  getCheckPermission: function getCheckPermission(token) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/checkPermission', {
-      token: token
-    }).then(function (res) {
-      if (res.status) return res.data;
-    });
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\xampp\\htdocs\\legal_subject\\resources\\js\\api.js'");
 
 /***/ }),
 
@@ -60999,8 +61111,7 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // window.api = require('./api').default;
-
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 Vue.config.productionTip = false;
 axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = '/legal_subject';
@@ -62056,14 +62167,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./api */ "./resources/js/api.js");
-/* harmony import */ var _userAPI__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./userAPI */ "./resources/js/userAPI.js");
+/* harmony import */ var _userAPI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./userAPI */ "./resources/js/userAPI.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 
@@ -62134,38 +62243,20 @@ var config = {
       var commit = _ref2.commit;
       commit('logout');
     },
-    getSchoolYear: function getSchoolYear(_ref3, token) {
-      var commit = _ref3.commit;
-      _api__WEBPACK_IMPORTED_MODULE_5__["default"].getSchoolYear(token).then(function (res) {
-        commit('setSchoolYear', res);
-      });
-    },
-    getViewSchoolYearData: function getViewSchoolYearData(_ref4, id) {
-      var commit = _ref4.commit;
-      _api__WEBPACK_IMPORTED_MODULE_5__["default"].getSchoolYearQuestions(id).then(function (res) {
-        commit('setViewSchoolYearData', res);
-      });
-    },
-    getCategories: function getCategories(_ref5) {
-      var commit = _ref5.commit;
-      _api__WEBPACK_IMPORTED_MODULE_5__["default"].getCategories().then(function (res) {
-        commit('setCategories', res);
-      });
-    },
-    getScores: function getScores(_ref6, data) {
+    getSchoolYear: function getSchoolYear(_ref3) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var commit, scoresData;
+        var commit, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref6.commit;
+                commit = _ref3.commit;
                 _context.next = 3;
-                return Object(_userAPI__WEBPACK_IMPORTED_MODULE_6__["getUserScores"])(data);
+                return Object(_userAPI__WEBPACK_IMPORTED_MODULE_5__["getSchoolYear"])();
 
               case 3:
-                scoresData = _context.sent;
-                commit('setScores', scoresData);
+                data = _context.sent;
+                commit('setSchoolYear', data);
 
               case 5:
               case "end":
@@ -62173,6 +62264,75 @@ var config = {
             }
           }
         }, _callee);
+      }))();
+    },
+    getViewSchoolYearData: function getViewSchoolYearData(_ref4, id) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var commit, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref4.commit;
+                data = Object(_userAPI__WEBPACK_IMPORTED_MODULE_5__["getSchoolYearQuestions"])({
+                  params: {
+                    id: id
+                  }
+                });
+                commit('setViewSchoolYearData', data);
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    getCategories: function getCategories(_ref5) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var commit, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref5.commit;
+                _context3.next = 3;
+                return Object(_userAPI__WEBPACK_IMPORTED_MODULE_5__["getCategories"])();
+
+              case 3:
+                data = _context3.sent;
+                commit('setCategories', data);
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    getScores: function getScores(_ref6, data) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var commit, scoresData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                commit = _ref6.commit;
+                _context4.next = 3;
+                return Object(_userAPI__WEBPACK_IMPORTED_MODULE_5__["getUserScores"])(data);
+
+              case 3:
+                scoresData = _context4.sent;
+                commit('setScores', scoresData);
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     },
     getQuestions: function getQuestions(_ref7, data) {
@@ -62194,27 +62354,34 @@ var config = {
 /*!*********************************!*\
   !*** ./resources/js/userAPI.js ***!
   \*********************************/
-/*! exports provided: userLogin, userLogout, getUserScores, createUsers */
+/*! exports provided: userLogin, userLogout, getCategories, getSchoolYear, getSchoolYearQuestions, checkPermission, getUserScores, getScoresDetail, createUsers, toggleSchoolYear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userLogin", function() { return userLogin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userLogout", function() { return userLogout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategories", function() { return getCategories; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSchoolYear", function() { return getSchoolYear; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSchoolYearQuestions", function() { return getSchoolYearQuestions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkPermission", function() { return checkPermission; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserScores", function() { return getUserScores; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getScoresDetail", function() { return getScoresDetail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUsers", function() { return createUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleSchoolYear", function() { return toggleSchoolYear; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 var baseRequest = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: 'api/'
+  baseURL: '/legal_subject/api/'
 });
 var adminRequest = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: 'api/admin/'
+  baseURL: '/legal_subject/api/admin/'
 });
 var userRequest = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: 'api/users/'
-});
+  baseURL: '/legal_subject/api/users/'
+}); // base request method
+
 var userLogin = function userLogin(data) {
   return baseRequest.post('login', data).then(function (res) {
     return res.data;
@@ -62225,13 +62392,45 @@ var userLogout = function userLogout(token) {
     return res.data;
   });
 };
+var getCategories = function getCategories() {
+  return baseRequest.get('getCategories').then(function (res) {
+    return res.data;
+  });
+};
+var getSchoolYear = function getSchoolYear() {
+  return baseRequest.get('getSchoolYear').then(function (res) {
+    return res.data;
+  });
+};
+var getSchoolYearQuestions = function getSchoolYearQuestions(config) {
+  return baseRequest.get('getSchoolYearQuestions', config).then(function (res) {
+    return res.data;
+  });
+};
+var checkPermission = function checkPermission(data) {
+  return baseRequest.post('checkPermission', data).then(function (res) {
+    return res.data;
+  });
+}; // user request method
+
 var getUserScores = function getUserScores(data) {
   return userRequest.post('getScores', data).then(function (res) {
     return res.data;
   });
 };
+var getScoresDetail = function getScoresDetail(data) {
+  return userRequest.post('getScoresDetail', data).then(function (res) {
+    return res.data;
+  });
+}; // admin request method
+
 var createUsers = function createUsers(data) {
   return adminRequest.post('createUsers', data).then(function (res) {
+    return res.data;
+  });
+};
+var toggleSchoolYear = function toggleSchoolYear(data) {
+  return adminRequest.post('switchSchoolYear', data).then(function (res) {
     return res.data;
   });
 };

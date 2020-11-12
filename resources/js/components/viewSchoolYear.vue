@@ -64,7 +64,7 @@ export default {
     swal.fire({
       title: "Message",
       text: "載入題目中，請稍後。",
-      timer: 3000,
+      timer: 1500,
       timerProgressBar: true,
       showConfirmButton: false,
     });
