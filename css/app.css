@@ -2164,11 +2164,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -10933,7 +10928,7 @@ a.text-dark:focus {
   border-bottom: 1px solid #cbccce;
   border-right: 1px solid #cbccce;
   font-size: 28px;
-  font-family: Microsoft JhengHei;
+  font-family: Microsoft JhengHei, sans-serif;
   color: gray;
 }
 

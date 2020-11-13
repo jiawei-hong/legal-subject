@@ -53,6 +53,10 @@ let routes = [
         component: require('./components/ViewScore').default
     },
     {
+        path:'/view/AnswerRecord/:id',
+        component: require('./components/AnswerRecord').default
+    },
+    {
         path:'*',
         redirect:'/'
     }

@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div v-if="isExam === true">
+        <div v-if="isExam === true && examQuestions">
             <div class="d-flex mt-2">
                 <button @click="prevIndex" class="btn btn-primary w-50 mr-2">
                     上一題
@@ -91,7 +91,6 @@
 </template>
 
 <script>
-import api from "../api";
 import {checkPermission} from "../userAPI";
 
 export default {
@@ -137,7 +136,7 @@ export default {
                 return [];
             } else {
                 data = data.filter((d) => d.isOpen && !d.isFinish);
-                this.schoolYearId = data[0] === undefined ? 0 : data[0].id;
+                this.schoolYearId = data[0] == undefined ? 0 : data[0].id;
             }
 
             return data;
@@ -148,7 +147,7 @@ export default {
             if (data == null) {
                 return [];
             } else if (data.length > 0) {
-                this.categoryId = data[0] === undefined ? 0 : data[0].id;
+                this.categoryId = data[0] == undefined ? 0 : data[0].id;
             }
 
             return data;

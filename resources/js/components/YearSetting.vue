@@ -39,8 +39,12 @@
                             class="btn btn-primary btn-block"
                             :to="'/view/Finish/' + item.id"
                         >查看結果
-                        </router-link
-                        >
+                        </router-link>
+                        <router-link
+                            class="btn btn-primary btn-block"
+                            :to="'/view/AnswerRecord/' + item.id"
+                        >填答紀錄
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -59,56 +63,55 @@
 </template>
 
 <script>
-import api from "../api";
-import {toggleSchoolYear} from "../userAPI";
+    import {toggleSchoolYear} from "../userAPI";
 
-export default {
-    mounted() {
-        this.$store.dispatch("getSchoolYear", this.$store.getters.getUser.token);
+    export default {
+        mounted() {
+            this.$store.dispatch("getSchoolYear", this.$store.getters.getUser.token);
 
-        if (this.$store.getters.getUser.permission !== "管理員") {
-            swal
-                .fire({
-                    title: "Message",
-                    text: "無權訪問。",
-                    timer: 1000,
+            if (this.$store.getters.getUser.permission !== "管理員") {
+                swal
+                    .fire({
+                        title: "Message",
+                        text: "無權訪問。",
+                        timer: 1000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    })
+                    .then(() => {
+                        this.$router.push("/");
+                    });
+            }
+        },
+        computed: {
+            schoolYear() {
+                return this.$store.getters.getSchoolYear;
+            },
+        },
+        methods: {
+            redirectToCreateSchoolYear() {
+                this.$router.push("/createSchoolYear");
+            },
+            async openSchoolYear(id, bool) {
+                swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    toast: true,
+                    text: "進行操作中，請稍後。",
+                    timer: 2000,
                     timerProgressBar: true,
                     showConfirmButton: false,
-                })
-                .then(() => {
-                    this.$router.push("/");
                 });
-        }
-    },
-    computed: {
-        schoolYear() {
-            return this.$store.getters.getSchoolYear;
-        },
-    },
-    methods: {
-        redirectToCreateSchoolYear() {
-            this.$router.push("/createSchoolYear");
-        },
-        async openSchoolYear(id, bool) {
-            swal.fire({
-                position:'top-end',
-                icon:'info',
-                toast: true,
-                text: "進行操作中，請稍後。",
-                timer: 2000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-            });
 
-            let token = this.$store.getters.getUser.token;
-            let data = await toggleSchoolYear({
-                id: id,
-                bool: bool,
-                token: token
-            });
+                let token = this.$store.getters.getUser.token;
+                let data = await toggleSchoolYear({
+                    id: id,
+                    bool: bool,
+                    token: token
+                });
 
-            await this.$store.dispatch("getSchoolYear", token);
+                await this.$store.dispatch("getSchoolYear", token);
+            },
         },
-    },
-};
+    };
 </script>

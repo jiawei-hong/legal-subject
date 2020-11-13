@@ -49,8 +49,6 @@ export default {
                         token: this.$store.getters.getUser.token,
                     })
                     .then(async (res) => {
-
-                        console.log(res);
                         await this.selectQuestionFile(res.data.data).then(() => {
                             swal.fire({
                                 title: "Message",
@@ -83,7 +81,7 @@ export default {
             let data = new FormData();
             let token = this.$store.getters.getUser.token;
 
-            file.addEventListener("change", (e) => {
+            file.addEventListener("change", async (e) => {
                 data.append("file", e.target.files[0]);
                 data.append("token", token);
                 data.append("yearId",id);
@@ -95,12 +93,14 @@ export default {
                     showConfirmButton: false,
                 });
 
-                axios.post("/api/importQuestion", data).then((res) => {
-                    swal.fire({
-                        title: "Message",
-                        text: `${res.data.msg}`,
-                        showConfirmButton: true,
-                    });
+                let x = await axios.post("/api/importQuestion", data).then(res => res.data);
+
+                swal.fire({
+                    title: "Message",
+                    text: `${x.msg}`,
+                    showConfirmButton: true,
+                }).then(() => {
+                    this.$router.push('/YearSetting');
                 });
             });
 

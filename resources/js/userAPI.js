@@ -29,3 +29,4 @@ export const getScoresDetail = data => userRequest.post('getScoresDetail',data).
 // admin request method
 export const createUsers = data => adminRequest.post('createUsers',data).then(res => res.data);
 export const toggleSchoolYear = data => adminRequest.post('switchSchoolYear',data).then(res => res.data);
+export const getUserAnswerRecord = data => adminRequest.post('getUserAnswerRecord',data).then(res => res.data);

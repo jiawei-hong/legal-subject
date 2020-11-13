@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import api from "../api";
 import {checkPermission} from "../userAPI";
 
 export default {
@@ -51,6 +50,5 @@ export default {
         }
         ,
     }
-    ,
 };
 </script>

@@ -433,4 +433,23 @@ class ApiController extends Controller
             'msg' => '不可查看別人成績'
         ]);
     }
+
+    public function getUserAnswerRecord(Request $request){
+        $answer_record = collect(User::all())->map(function($d) use($request) {
+            return collect([
+                'student_class' => Classname::find($d->class_id)->name,
+                'student_number' => $d->account,
+                'student_name' => $d->username,
+                'record' => collect(Scores::where([
+                    ['year_id','=',$request->year_id],
+                    ['user_id','=',$d->id]
+                ])->select('score')->get())->pad(2,'未作答')
+            ]);
+        });
+
+        return [
+            'msg' => 'Calc Time Out',
+            'data' => $answer_record
+        ];
+    }
 }

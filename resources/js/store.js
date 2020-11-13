@@ -13,6 +13,7 @@ const config = {
     categories:[],
     scores:[],
     questions:[],
+    answerRecord:[],
 };
 
 export default new Vuex.Store({
@@ -27,6 +28,7 @@ export default new Vuex.Store({
         getCategories: state => state.categories,
         getScores: state => state.scores,
         getQuestions: state => state.questions,
+        getAnswerRecord: state => state.answerRecord,
     },
     mutations:{
         setUser: (state,payload) => state.userData = payload,
@@ -35,7 +37,8 @@ export default new Vuex.Store({
         setCategories: (state,payload) => state.categories = payload,
         setScores:(state,payload) => state.scores = payload,
         logout: state => state.userData = [],
-        setQuestions: (state,payload) => state.questions = payload
+        setQuestions: (state,payload) => state.questions = payload,
+        setAnswerRecord: (state,payload) => state.answerRecord = payload,
     },
     actions:{
         setUser({commit},payload){
@@ -50,7 +53,7 @@ export default new Vuex.Store({
             commit('setSchoolYear',data);
         },
         async getViewSchoolYearData({commit},id){
-            let data = getSchoolYearQuestions({
+            let data = await getSchoolYearQuestions({
                 params:{
                     id:id
                 }
@@ -73,6 +76,9 @@ export default new Vuex.Store({
         },
         setQuestions({commit},data){
             commit('setQuestions',data);
+        },
+        getAnswerRecord({commit},payload){
+            commit('setAnswerRecord',payload);
         }
     }
 });

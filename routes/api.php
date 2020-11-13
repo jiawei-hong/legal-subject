@@ -28,6 +28,7 @@ Route::namespace('api')->group(function(){
 
     Route::middleware('admin')->prefix('admin')->group(function(){
         Route::post('switchSchoolYear','ApiController@switchSchoolYear');
+        Route::post('getUserAnswerRecord','ApiController@getUserAnswerRecord');
     });
 
     Route::middleware('student')->prefix('users')->group(function(){

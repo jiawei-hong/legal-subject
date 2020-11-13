@@ -1,7 +1,6 @@
 <template></template>
 
 <script>
-import api from "../api";
 import { userLogout } from "../userAPI";
 
 export default {
