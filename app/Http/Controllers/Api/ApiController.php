@@ -22,6 +22,8 @@ use App\Classname;
 use Excel;
 use Storage;
 
+set_time_limit(0);
+
 class ApiController extends Controller
 {
     public function login(Request $request){
@@ -435,7 +437,7 @@ class ApiController extends Controller
     }
 
     public function getUserAnswerRecord(Request $request){
-        $answer_record = collect(User::all())->map(function($d) use($request) {
+        $answer_record = collect(User::where('id','>',4)->get())->map(function($d) use($request) {
             return collect([
                 'student_class' => Classname::find($d->class_id)->name,
                 'student_number' => $d->account,
@@ -448,7 +450,7 @@ class ApiController extends Controller
         });
 
         return [
-            'msg' => 'Calc Time Out',
+            'msg' => '查詢紀錄中，請稍後。',
             'data' => $answer_record
         ];
     }

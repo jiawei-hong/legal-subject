@@ -36,7 +36,6 @@
                         timerProgressBar: true,
                         showConfirmButton: false,
                     });
-
                     axios.post("/api/createUsers", data).then((res) => {
                         console.log(res);
                         swal.fire({

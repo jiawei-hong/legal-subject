@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import api from '../api';
 export default {
     computed: {
         time: function () {
