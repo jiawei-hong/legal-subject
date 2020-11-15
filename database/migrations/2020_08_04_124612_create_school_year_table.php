@@ -18,6 +18,8 @@ class CreateSchoolYearTable extends Migration
             $table->string('year');
             $table->boolean('isOpen')->default(false);
             $table->boolean('isFinish')->default(false);
+            $table->boolean('isExam')->default(false);
+            $table->boolean('isAnswerRecord')->default(false);
             $table->timestamps();
         });
     }

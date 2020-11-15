@@ -60,23 +60,16 @@ export default {
     },
     computed: {
         schoolYear() {
-            let data = this.$store.getters.getSchoolYear;
+            let data = this.$store.getters.getSchoolYear.filter((d) => d.isOpen && !d.isFinish);
 
-            if (data == null) {
-                return [];
-            } else {
-                data = data.filter((d) => d.isOpen && !d.isFinish);
-                this.schoolYearId = data[0] === undefined ? 0 : data[0].id;
-            }
+            this.schoolYearId = data[0] === undefined ? 0 : data[0].id;
 
             return data;
         },
         categories() {
             let data = this.$store.getters.getCategories;
 
-            if (data == null) {
-                return [];
-            } else if (data.length > 0) {
+            if (data.length > 0) {
                 this.categoryId = data[0] === undefined ? 0 : data[0].id;
             }
 

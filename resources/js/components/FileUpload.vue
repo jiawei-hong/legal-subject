@@ -37,7 +37,6 @@
                         showConfirmButton: false,
                     });
                     axios.post("/api/createUsers", data).then((res) => {
-                        console.log(res);
                         swal.fire({
                             title: "Message",
                             text: `${res.data.msg}`,

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {getUserAnswerRecord} from "../userAPI";
+import {getUserAnswerRecord} from "../api";
 
 export default {
     data() {

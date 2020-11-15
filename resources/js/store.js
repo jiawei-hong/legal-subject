@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
-import { getUserScores,getCategories,getSchoolYear,getSchoolYearQuestions } from './userAPI';
+import { getUserScores,getCategories,getSchoolYear,getSchoolYearQuestions } from './api';
 
 Vue.use(Vuex);
 
@@ -36,7 +36,7 @@ export default new Vuex.Store({
         setViewSchoolYearData: (state,payload) => state.viewSchoolYearData = payload,
         setCategories: (state,payload) => state.categories = payload,
         setScores:(state,payload) => state.scores = payload,
-        logout: state => state.userData = [],
+        logout: state => Object.assign(state,config),
         setQuestions: (state,payload) => state.questions = payload,
         setAnswerRecord: (state,payload) => state.answerRecord = payload,
     },

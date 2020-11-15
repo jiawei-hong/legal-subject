@@ -2,9 +2,7 @@
     <div class="container">
         <input type="file" name="file" id="questionFile" style="display: none"/>
         <div class="mt-3">
-            <button @click="redirectToYearSetting" class="btn btn-primary btn-block">
-                返回學年度設置
-            </button>
+            <router-link class="btn btn-primary btn-block" to="YearSetting">返回學年度設置</router-link>
         </div>
 
         <div class="card">
@@ -32,6 +30,8 @@
 </template>
 
 <script>
+import {addSchoolYear} from "../api";
+
 export default {
     data() {
         return {
@@ -39,42 +39,37 @@ export default {
         };
     },
     methods: {
-        createSchoolYear() {
+        async createSchoolYear() {
             let regex = /\d{3}-\d{1}$/u;
 
             if (regex.test(this.schoolYear)) {
-                axios
-                    .post("/api/addSchoolYear", {
-                        schoolYear: this.schoolYear,
-                        token: this.$store.getters.getUser.token,
-                    })
-                    .then(async (res) => {
-                        await this.selectQuestionFile(res.data.data).then(() => {
-                            swal.fire({
-                                title: "Message",
-                                text: res.data.msg,
-                                timer: 2000,
-                                timerProgressBar: true,
-                                showConfirmButton: false,
-                            })
-                        });
-                    });
+                let data = await addSchoolYear({
+                    schoolYear: this.schoolYear,
+                    token: this.$store.getters.getUser.token,
+                })
+
+                if(data.status)
+                    await this.selectQuestionFile(data.id);
+
+
+                swal.fire({
+                    title: "Message",
+                    text: data.msg,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                })
             } else {
-                swal
-                    .fire({
-                        title: "Message",
-                        text: "請填入學年度或格式錯誤。",
-                        timer: 2000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                    })
-                    .then(() => {
-                        this.schoolYear = "";
-                    });
+                swal.fire({
+                    title: "Message",
+                    text: "請填入學年度或格式錯誤。",
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                }).then(() => {
+                    this.schoolYear = "";
+                });
             }
-        },
-        redirectToYearSetting: function () {
-            this.$router.push("/YearSetting");
         },
         async selectQuestionFile(id) {
             let file = document.querySelector("#questionFile");
@@ -84,7 +79,7 @@ export default {
             file.addEventListener("change", async (e) => {
                 data.append("file", e.target.files[0]);
                 data.append("token", token);
-                data.append("yearId",id);
+                data.append("yearId", id);
                 swal.fire({
                     title: "Message",
                     text: "導入題目資料處理中，導入完成會有新的提示，請耐心等候",

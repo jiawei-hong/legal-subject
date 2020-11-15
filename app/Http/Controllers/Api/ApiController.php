@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use App\Exports\UsersExport;
 use App\Exports\FullMarksExport;
@@ -59,7 +58,8 @@ class ApiController extends Controller
 
         if($query->count() > 0){
             return [
-                'msg' => '學年度已存在。',
+                'status' => false,
+                'msg' => '學年度已存在。'
             ];
         }
 
@@ -68,12 +68,13 @@ class ApiController extends Controller
         ]);
 
         return [
-            'msg' => '創建成功',
-            'data' => $data->id
+            'status' => true,
+            'id' => $data->id,
+            'msg' => '創建成功'
         ];
     }
 
-    public function switchSchoolYear(Request $request){
+    public function toggleSchoolYear(Request $request){
         foreach(SchoolYear::where('id','!=',$request->id)->get() as $data){
             $data->update(['isOpen' => 0]);
         }
@@ -81,7 +82,9 @@ class ApiController extends Controller
         $query = SchoolYear::where('id',$request->id)->first();
         $query->update(['isOpen' => !$request->bool]);
 
-        return $query;
+        return response([
+            'msg' => !$request->bool ? '學年度已開啟。' : '學年度已關閉。',
+        ]);
     }
 
     public function getSchoolYearQuestions(Request $request){
@@ -119,16 +122,22 @@ class ApiController extends Controller
         return $data;
     }
 
+    public function getCategories()
+    {
+        return Category::select('id','name')->get();
+    }
+
+    public function getQuestion($id)
+    {
+        return Question::find($id)->first();
+    }
+
     public function getOption($question_id){
         return Option::where('question_id',$question_id)->select('id','value')->get();
     }
 
     public function getAnswer($question_id){
         return Answer::where('question_id',$question_id)->select('option_id')->first();
-    }
-
-    public function getCategories(){
-        return Category::select('id','name')->get();
     }
 
     public function addScore(Request $request){
@@ -152,11 +161,9 @@ class ApiController extends Controller
             ]);
         }
 
-        $userData = User::all()->map(function($user){
+        return User::all()->map(function($user){
             return Scores::where('user_id',$user->id)->OrderBy('score','desc')->first();
         });
-
-        return $userData;
     }
 
     public function getScoresCount(Request $request){
@@ -167,10 +174,11 @@ class ApiController extends Controller
     }
 
     public function getScores(Request $request){
-        $data = [];
+        $data = collect();
 
         foreach (Scores::where('user_id',$request->id)->get() as $d) {
-            array_push($data, [$d->id,Category::find($d->category_id)->name, SchoolYear::find($d->year_id)->year, $d->score,$d->created_at]);
+            $year_data = SchoolYear::find($d->year_id);
+            $data->push([$d->id,Category::find($d->category_id)->name, $year_data->year, $d->score,$d->created_at,$year_data->isAnswerRecord]);
         }
 
         return $data;
@@ -186,9 +194,7 @@ class ApiController extends Controller
     }
 
     public function logout(Request $request){
-        $user = User::where('api_token',$request->token)->update(['api_token' => Str::random(80)]);
-
-        return true;
+        return User::where('api_token',$request->token)->update(['api_token' => Str::random(80)]);
     }
 
     public function getFinishData(Request $request){
@@ -237,7 +243,7 @@ class ApiController extends Controller
         ];
     }
 
-    public function createUsers(Request $request){
+    public function importUsers(Request $request){
         $user = User::all();
         $exceptUserId = collect([1,2,3,4]);
 
@@ -328,8 +334,10 @@ class ApiController extends Controller
         return Excel::download(new UsersExport($return_data),'report.xlsx');
     }
 
-    public function fullMarksExport($id){
-        return Excel::download(new FullMarksExport($this->getFullMarks($id)),'test.xlsx');
+    public function fullMarksExport(Request $request){
+        $data = $this->getFullMarks(new Request($request->all()));
+
+        return Excel::download(new FullMarksExport($data),'test.xlsx');
     }
 
     public function importQuestion(Request $request){
@@ -392,9 +400,9 @@ class ApiController extends Controller
         ];
     }
 
-    public function getFullMarks($id){
+    public function getFullMarks(Request $request){
         return collect(Scores::where([
-            ['year_id','=',$id],
+            ['year_id','=',$request->year_id],
             ['score','=',100]
         ])->get())->map(function($d){
             $user = User::where('id',$d->user_id)->get()->first();
@@ -450,8 +458,28 @@ class ApiController extends Controller
         });
 
         return [
-            'msg' => '查詢紀錄中，請稍後。',
+            'msg' => '查詢已完成。',
             'data' => $answer_record
         ];
+    }
+
+    public function toggleAnswerRecord(Request $request){
+        SchoolYear::where('id',$request->id)->update([
+            'isAnswerRecord' => !$request->bool
+        ]);
+
+        return response([
+            'msg' => !$request->bool ? '分數詳細資料已開啟。' : '分數詳細資料已關閉。',
+        ]);
+    }
+
+    public function toggleExam(Request $request){
+        SchoolYear::where('id',$request->id)->update([
+            'isExam' => !$request->bool
+        ]);
+
+        return response([
+            'msg' => !$request->bool ? '測驗已開啟。' : '測驗已關閉。',
+        ]);
     }
 }

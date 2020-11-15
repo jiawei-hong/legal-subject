@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import {getScoresDetail} from "../userAPI";
+import {getScoresDetail} from "../api";
 
 export default {
     async mounted() {

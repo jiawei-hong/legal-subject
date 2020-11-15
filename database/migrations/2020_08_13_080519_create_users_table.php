@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('account');
             $table->string('password');
             $table->string('permission')->default('學生');
-            $table->bigInteger('classnumber')->default(0);
             $table->bigInteger('class_id')->unsigned()->index();
             $table->foreign('class_id')->references('id')->on('class');
             $table->timestamps();

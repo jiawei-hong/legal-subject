@@ -1,7 +1,7 @@
 <template></template>
 
 <script>
-import { userLogout } from "../userAPI";
+import { userLogout } from "../api";
 
 export default {
   async mounted() {

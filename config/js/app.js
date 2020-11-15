@@ -2039,7 +2039,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2077,7 +2076,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2088,65 +2088,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     createSchoolYear: function createSchoolYear() {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var regex, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                regex = /[0-9]{3}\x2D[0-9]{1}$/;
+      var regex = /[0-9]{3}\x2D[0-9]{1}$/;
 
-                if (!regex.test(_this.schoolYear)) {
-                  _context.next = 11;
-                  break;
+      if (regex.test(this.schoolYear)) {
+        axios.post("/api/addSchoolYear", {
+          schoolYear: this.schoolYear,
+          token: this.$store.getters.getUser.token
+        }).then( /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return _this.selectQuestionFile(res.data.data).then(function () {
+                      swal.fire({
+                        title: "Message",
+                        text: res.data.msg,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                      });
+                    });
+
+                  case 2:
+                  case "end":
+                    return _context.stop();
                 }
+              }
+            }, _callee);
+          }));
 
-                _context.next = 4;
-                return Object(_api__WEBPACK_IMPORTED_MODULE_1__["addSchoolYear"])({
-                  schoolYear: _this.schoolYear,
-                  token: _this.$store.getters.getUser.token
-                });
-
-              case 4:
-                data = _context.sent;
-
-                if (!data.status) {
-                  _context.next = 8;
-                  break;
-                }
-
-                _context.next = 8;
-                return _this.selectQuestionFile(data.id);
-
-              case 8:
-                swal.fire({
-                  title: "Message",
-                  text: data.msg,
-                  timer: 2000,
-                  timerProgressBar: true,
-                  showConfirmButton: false
-                });
-                _context.next = 12;
-                break;
-
-              case 11:
-                swal.fire({
-                  title: "Message",
-                  text: "請填入學年度或格式錯誤。",
-                  timer: 2000,
-                  timerProgressBar: true,
-                  showConfirmButton: false
-                }).then(function () {
-                  _this.schoolYear = "";
-                });
-
-              case 12:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+          return function (_x) {
+            return _ref.apply(this, arguments);
+          };
+        }());
+      } else {
+        swal.fire({
+          title: "Message",
+          text: "請填入學年度或格式錯誤。",
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        }).then(function () {
+          _this.schoolYear = "";
+        });
+      }
+    },
+    redirectToYearSetting: function redirectToYearSetting() {
+      this.$router.push("/YearSetting");
     },
     selectQuestionFile: function selectQuestionFile(id) {
       var _this2 = this;
@@ -2161,7 +2151,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data = new FormData();
                 token = _this2.$store.getters.getUser.token;
                 file.addEventListener("change", /*#__PURE__*/function () {
-                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+                  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
                     var x;
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
                       while (1) {
@@ -2200,8 +2190,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     }, _callee2);
                   }));
 
-                  return function (_x) {
-                    return _ref.apply(this, arguments);
+                  return function (_x2) {
+                    return _ref2.apply(this, arguments);
                   };
                 }());
                 file.click();
@@ -2237,6 +2227,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2388,7 +2383,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return [];
       } else {
         data = data.filter(function (d) {
-          return d.isOpen && !d.isFinish && d.isExam;
+          return d.isOpen && !d.isFinish;
         });
         this.schoolYearId = data[0] == undefined ? 0 : data[0].id;
       }
@@ -2420,51 +2415,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         timer: 3000,
         timerProgressBar: true,
         showConfirmButton: false
-      }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return Object(_api__WEBPACK_IMPORTED_MODULE_1__["getScoresCount"])({
-                  id: _this2.$store.getters.getUser.id,
-                  yearId: _this2.schoolYearId,
-                  token: _this2.$store.getters.getUser.token
-                });
+      }).then(function () {
+        axios.post("/api/users/getScoresCount", {
+          id: _this2.$store.getters.getUser.id,
+          yearId: _this2.schoolYearId,
+          token: _this2.$store.getters.getUser.token
+        }).then(function (res) {
+          if (res.data >= 2) {
+            swal.fire({
+              title: "Tips",
+              text: "測驗次數已經達到兩次。",
+              timer: 3000,
+              timerProgressBar: true,
+              showConfirmButton: false
+            });
+          } else {
+            _this2.$store.dispatch("getViewSchoolYearData", _this2.schoolYearId);
 
-              case 2:
-                data = _context2.sent;
-
-                if (!(data >= 2)) {
-                  _context2.next = 7;
-                  break;
-                }
-
-                swal.fire({
-                  title: "Tips",
-                  text: "測驗次數已經達到兩次。",
-                  timer: 3000,
-                  timerProgressBar: true,
-                  showConfirmButton: false
-                });
-                _context2.next = 10;
-                break;
-
-              case 7:
-                _context2.next = 9;
-                return _this2.$store.dispatch("getViewSchoolYearData", _this2.schoolYearId);
-
-              case 9:
-                _this2.isExam = true;
-
-              case 10:
-              case "end":
-                return _context2.stop();
-            }
+            _this2.isExam = true;
           }
-        }, _callee2);
-      })));
+        });
+      });
     },
     prevIndex: function prevIndex() {
       if (this.currentIndex - 1 < 0) {
@@ -2488,66 +2459,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Yes"
-      }).then( /*#__PURE__*/function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(result) {
-          var answerIsFullUp;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  answerIsFullUp = _this3.userAnswers.filter(function (d) {
-                    return d === 0;
-                  }).length === 0;
-
-                  if (!(result.value && answerIsFullUp)) {
-                    _context3.next = 7;
-                    break;
-                  }
-
-                  _context3.next = 4;
-                  return Object(_api__WEBPACK_IMPORTED_MODULE_1__["addScore"])({
-                    category_id: _this3.categoryId,
-                    year_id: _this3.schoolYearId,
-                    user_id: _this3.$store.getters.getUser.id,
-                    userAnswer: _this3.userAnswers,
-                    questions: _this3.examQuestions.questions,
-                    token: _this3.$store.getters.getUser.token
-                  });
-
-                case 4:
-                  swal.fire({
-                    text: "成績傳送完成。",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer: 1500
-                  }).then(function () {
-                    _this3.$router.push("/Scores");
-                  });
-                  _context3.next = 8;
-                  break;
-
-                case 7:
-                  if (result.value) {
-                    swal.fire({
-                      text: "尚未有題目還未填寫。",
-                      icon: "error",
-                      showConfirmButton: false,
-                      timer: 1500
-                    });
-                  }
-
-                case 8:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee3);
-        }));
-
-        return function (_x) {
-          return _ref2.apply(this, arguments);
-        };
-      }());
+      }).then(function (result) {
+        if (result.value && _this3.userAnswers.filter(function (d) {
+          return d === 0;
+        }).length === 0) {
+          axios.post("/api/users/addScore", {
+            category_id: _this3.categoryId,
+            year_id: _this3.schoolYearId,
+            user_id: _this3.$store.getters.getUser.id,
+            userAnswer: _this3.userAnswers,
+            questions: _this3.examQuestions.questions,
+            token: _this3.$store.getters.getUser.token
+          }).then(function () {
+            swal.fire({
+              text: "成績傳送完成。",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500
+            }).then(function () {
+              _this3.$router.push("/Scores");
+            });
+          });
+        } else if (result.value) {
+          swal.fire({
+            text: "尚未有題目還未填寫。",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      });
     },
     fillAnswer: function fillAnswer() {
       var _this4 = this;
@@ -2718,6 +2659,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2771,6 +2714,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.currentIndex = Object.keys(this.recordData)[this.recordIndex];
     },
+    backToMain: function backToMain() {
+      this.$router.push("/YearSetting");
+    },
     downloadXlsx: function downloadXlsx() {
       axios.get("/api/xlsx/".concat(this.$route.params.id), {
         headers: {
@@ -2804,15 +2750,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
@@ -2839,7 +2776,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2849,47 +2785,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var id;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              id = _this.$route.params.id;
-              _context.next = 3;
-              return Object(_api__WEBPACK_IMPORTED_MODULE_1__["getFullMarks"])({
-                params: {
-                  year_id: id,
-                  token: _this.$store.getters.getUser.token
-                }
-              });
-
-            case 3:
-              _this.result = _context.sent;
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+    var id = this.$route.params.id;
+    axios.post("api/getFullMarks/".concat(id), {
+      token: this.$store.getters.getUser.token
+    }).then(function (res) {
+      return _this.result = res.data;
+    });
   },
   methods: {
     downloadXlsx: function downloadXlsx() {
-      var id = this.$route.params.id;
-      axios.get("/api/fullMarks/".concat(id), {
+      axios.get("/api/fullMarks/".concat(this.$route.params.id), {
         headers: {
           "Content-Disposition": "attachment; filename=template.xlsx",
           "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         },
-        responseType: "blob",
+        responseType: "arraybuffer",
         params: {
-          year_id: id,
           token: this.$store.getters.getUser.token
         }
       }).then(function (response) {
-        var url = window.URL.createObjectURL(response.data);
+        var url = window.URL.createObjectURL(new Blob([response.data]));
         var link = document.createElement("a");
         link.href = url;
         link.setAttribute("download", "template.xlsx");
@@ -2972,16 +2887,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     schoolYear: function schoolYear() {
-      var data = this.$store.getters.getSchoolYear.filter(function (d) {
-        return d.isOpen && !d.isFinish;
-      });
-      this.schoolYearId = data[0] === undefined ? 0 : data[0].id;
+      var data = this.$store.getters.getSchoolYear;
+
+      if (data == null) {
+        return [];
+      } else {
+        data = data.filter(function (d) {
+          return d.isOpen && !d.isFinish;
+        });
+        this.schoolYearId = data[0] === undefined ? 0 : data[0].id;
+      }
+
       return data;
     },
     categories: function categories() {
       var data = this.$store.getters.getCategories;
 
-      if (data.length > 0) {
+      if (data == null) {
+        return [];
+      } else if (data.length > 0) {
         this.categoryId = data[0] === undefined ? 0 : data[0].id;
       }
 
@@ -3191,6 +3115,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3597,24 +3526,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3640,47 +3551,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    getToken: function getToken() {
-      return this.$store.getters.getUser.token;
+    redirectToCreateSchoolYear: function redirectToCreateSchoolYear() {
+      this.$router.push("/createSchoolYear");
     },
-    getSchoolYear: function getSchoolYear() {
-      return this.$store.dispatch('getSchoolYear', this.getToken());
-    },
-    showMessage: function showMessage(msg) {
-      swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        toast: true,
-        title: "\u8A0A\u606F: ".concat(msg),
-        timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false
-      });
-    },
-    toggleSchoolYear: function toggleSchoolYear(id, bool) {
+    openSchoolYear: function openSchoolYear(id, bool) {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var data;
+        var token;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                swal.fire({
+                  position: 'top-end',
+                  icon: 'info',
+                  toast: true,
+                  text: "進行操作中，請稍後。",
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+                token = _this2.$store.getters.getUser.token;
+                _context.next = 4;
                 return Object(_api__WEBPACK_IMPORTED_MODULE_1__["toggleSchoolYear"])({
                   id: id,
                   bool: bool,
-                  token: _this2.getToken()
+                  token: token
                 });
 
-              case 2:
-                data = _context.sent;
+              case 4:
+                _context.next = 6;
+                return _this2.$store.dispatch("getSchoolYear", token);
 
-                _this2.showMessage(data.msg);
-
-                _this2.getSchoolYear();
-
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -3692,62 +3596,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var data;
+        var token;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                swal.fire({
+                  position: 'top-end',
+                  icon: 'info',
+                  toast: true,
+                  text: "進行操作中，請稍後。",
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+                });
+                token = _this3.$store.getters.getUser.token;
+                _context2.next = 4;
                 return Object(_api__WEBPACK_IMPORTED_MODULE_1__["toggleAnswerRecord"])({
                   id: id,
                   bool: bool,
-                  token: _this3.getToken()
+                  token: token
                 });
 
-              case 2:
-                data = _context2.sent;
+              case 4:
+                _context2.next = 6;
+                return _this3.$store.dispatch("getSchoolYear", token);
 
-                _this3.showMessage(data.msg);
-
-                _this3.getSchoolYear();
-
-              case 5:
+              case 6:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
-      }))();
-    },
-    toggleExam: function toggleExam(id, bool) {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return Object(_api__WEBPACK_IMPORTED_MODULE_1__["toggleExam"])({
-                  id: id,
-                  bool: bool,
-                  token: _this4.getToken()
-                });
-
-              case 2:
-                data = _context3.sent;
-
-                _this4.showMessage(data.msg);
-
-                _this4.getSchoolYear();
-
-              case 5:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
       }))();
     }
   }
@@ -43544,21 +43424,16 @@ var render = function() {
       attrs: { type: "file", name: "file", id: "questionFile" }
     }),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "mt-3" },
-      [
-        _c(
-          "router-link",
-          {
-            staticClass: "btn btn-primary btn-block",
-            attrs: { to: "YearSetting" }
-          },
-          [_vm._v("返回學年度設置")]
-        )
-      ],
-      1
-    ),
+    _c("div", { staticClass: "mt-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-block",
+          on: { click: _vm.redirectToYearSetting }
+        },
+        [_vm._v("\n            返回學年度設置\n        ")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-header" }, [_vm._v("創建學年度")]),
@@ -43932,118 +43807,109 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c(
-        "router-link",
-        {
-          staticClass: "btn btn-primary btn-block mt-2",
-          attrs: { to: "/YearSetting" }
-        },
-        [_vm._v("返回學年度設置")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary btn-block mt-2",
-          on: { click: _vm.downloadXlsx }
-        },
-        [_vm._v("\n        下載Excel\n    ")]
-      ),
-      _vm._v(" "),
-      _vm.recordData[_vm.currentIndex]
-        ? _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header text-center" }, [
-              _vm._v("題目")
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary btn-block mt-2",
+        on: { click: _vm.backToMain }
+      },
+      [_vm._v("\n    返回主頁面\n  ")]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary btn-block mt-2",
+        on: { click: _vm.downloadXlsx }
+      },
+      [_vm._v("\n    下載Excel\n  ")]
+    ),
+    _vm._v(" "),
+    _vm.recordData[_vm.currentIndex]
+      ? _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header text-center" }, [
+            _vm._v("題目")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v(
+                "\n        " +
+                  _vm._s(_vm.recordData[_vm.currentIndex].question) +
+                  "\n      "
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h5", { staticClass: "card-title" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.recordData[_vm.currentIndex].question) +
-                    "\n            "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("div", { staticClass: "card" }, [
-                    _c("div", { staticClass: "card-body text-center" }, [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _vm._v("答對率")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(
-                              (_vm.recordData[_vm.currentIndex].correct /
-                                (_vm.recordData[_vm.currentIndex].correct +
-                                  _vm.recordData[_vm.currentIndex].incorrect)) *
-                                100 +
-                                "%"
-                            ) +
-                            "\n                            "
-                        )
-                      ])
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body text-center" }, [
+                    _c("h5", { staticClass: "card-title" }, [_vm._v("答對率")]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(
+                            (_vm.recordData[_vm.currentIndex].correct /
+                              (_vm.recordData[_vm.currentIndex].correct +
+                                _vm.recordData[_vm.currentIndex].incorrect)) *
+                              100 +
+                              "%"
+                          ) +
+                          "\n              "
+                      )
                     ])
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("div", { staticClass: "card" }, [
-                    _c("div", { staticClass: "card-body text-center" }, [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _vm._v("答錯率")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(
-                              (_vm.recordData[_vm.currentIndex].incorrect /
-                                (_vm.recordData[_vm.currentIndex].correct +
-                                  _vm.recordData[_vm.currentIndex].incorrect)) *
-                                100 +
-                                "%"
-                            ) +
-                            "\n                            "
-                        )
-                      ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body text-center" }, [
+                    _c("h5", { staticClass: "card-title" }, [_vm._v("答錯率")]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(
+                            (_vm.recordData[_vm.currentIndex].incorrect /
+                              (_vm.recordData[_vm.currentIndex].correct +
+                                _vm.recordData[_vm.currentIndex].incorrect)) *
+                              100 +
+                              "%"
+                          ) +
+                          "\n              "
+                      )
                     ])
                   ])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-footer text-center d-flex" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary w-50 mr-2",
-                  on: { click: _vm.prevIndex }
-                },
-                [_vm._v("\n                上一題\n            ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary w-50 mr-2",
-                  on: { click: _vm.nextIndex }
-                },
-                [_vm._v("\n                下一題\n            ")]
-              )
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer text-center d-flex" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary w-50 mr-2",
+                on: { click: _vm.prevIndex }
+              },
+              [_vm._v("\n        上一題\n      ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary w-50 mr-2",
+                on: { click: _vm.nextIndex }
+              },
+              [_vm._v("\n        下一題\n      ")]
+            )
           ])
-        : _vm._e()
-    ],
-    1
-  )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44468,9 +44334,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n          " +
+                            "\n            " +
                               _vm._s(_vm.userData.username) +
-                              "\n        "
+                              "\n          "
                           )
                         ]
                       ),
@@ -44804,21 +44670,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      { staticClass: "mt-3" },
-      [
-        _c(
-          "router-link",
-          {
-            staticClass: "btn btn-primary btn-block",
-            attrs: { to: "createSchoolYear" }
-          },
-          [_vm._v("新增學年度")]
-        )
-      ],
-      1
-    ),
+    _c("div", { staticClass: "mt-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-block",
+          on: { click: _vm.redirectToCreateSchoolYear }
+        },
+        [_vm._v("\n            新增學年度\n        ")]
+      )
+    ]),
     _vm._v(" "),
     _vm.schoolYear
       ? _c("div", [
@@ -44835,178 +44696,97 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-body text-center" }, [
-                  _c("div", { staticClass: "dropdown mb-1" }, [
+                _c(
+                  "div",
+                  { staticClass: "card-body text-center" },
+                  [
                     _c(
                       "button",
                       {
-                        staticClass:
-                          "btn btn-primary dropdown-toggle btn-block",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "dropdown",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false"
+                        staticClass: "btn btn-block",
+                        class: !item.isOpen ? "btn-success" : "btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.openSchoolYear(item.id, item.isOpen)
+                          }
                         }
                       },
                       [
                         _vm._v(
-                          "\n                            開關功能\n                        "
+                          "\n                        " +
+                            _vm._s(!item.isOpen ? "開啟" : "關閉") +
+                            "\n                    "
                         )
                       ]
                     ),
                     _vm._v(" "),
                     _c(
-                      "div",
-                      {
-                        staticClass: "dropdown-menu mb-3 text-center btn-block"
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn w-75 mb-1",
-                            class: !item.isOpen ? "btn-success" : "btn-danger",
-                            on: {
-                              click: function($event) {
-                                return _vm.toggleSchoolYear(
-                                  item.id,
-                                  item.isOpen
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  !item.isOpen ? "開啟題庫查看" : "關閉題庫查看"
-                                ) +
-                                "\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn w-75 mb-1",
-                            class: !item.isExam ? "btn-success" : "btn-danger",
-                            on: {
-                              click: function($event) {
-                                return _vm.toggleExam(item.id, item.isExam)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  !item.isExam ? "開啟題庫測驗" : "關閉題庫測驗"
-                                ) +
-                                "\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn w-75 mb-1",
-                            class: !item.isAnswerRecord
-                              ? "btn-success"
-                              : "btn-danger",
-                            on: {
-                              click: function($event) {
-                                return _vm.toggleAnswerRecord(
-                                  item.id,
-                                  item.isAnswerRecord
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  !item.isAnswerRecord
-                                    ? "開啟詳細資料"
-                                    : "關閉詳細資料"
-                                ) +
-                                "\n                            "
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "dropdown mb-1" }, [
-                    _c(
                       "button",
                       {
-                        staticClass:
-                          "btn btn-primary dropdown-toggle btn-block",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "dropdown",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false"
+                        staticClass: "btn btn-block",
+                        class: !item.isAnswerRecord
+                          ? "btn-success"
+                          : "btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleAnswerRecord(
+                              item.id,
+                              item.isAnswerRecord
+                            )
+                          }
                         }
                       },
                       [
                         _vm._v(
-                          "\n                            查看功能\n                        "
+                          "\n                        " +
+                            _vm._s(
+                              !item.isAnswerRecord
+                                ? "開啟詳細資料"
+                                : "關閉詳細資料"
+                            ) +
+                            "\n                    "
                         )
                       ]
                     ),
                     _vm._v(" "),
                     _c(
-                      "div",
+                      "router-link",
                       {
-                        staticClass: "dropdown-menu mb-3 text-center btn-block"
+                        staticClass: "btn btn-primary btn-block",
+                        attrs: { to: "/view/SchoolYear/" + item.id }
                       },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn btn-primary w-75 mb-1",
-                            attrs: { to: "/view/SchoolYear/" + item.id }
-                          },
-                          [_vm._v("查看題庫\n                            ")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn btn-primary w-75 mb-1",
-                            attrs: { to: "/view/FullMarks/" + item.id }
-                          },
-                          [_vm._v("查看滿分\n                            ")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn btn-primary w-75 mb-1",
-                            attrs: { to: "/view/Finish/" + item.id }
-                          },
-                          [_vm._v("查看結果\n                            ")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn btn-primary w-75 mb-1",
-                            attrs: { to: "/view/AnswerRecord/" + item.id }
-                          },
-                          [_vm._v("填答紀錄\n                            ")]
-                        )
-                      ],
-                      1
+                      [_vm._v("查看題庫\n                    ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary btn-block",
+                        attrs: { to: "/view/FullMarks/" + item.id }
+                      },
+                      [_vm._v("查看滿分\n                    ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary btn-block",
+                        attrs: { to: "/view/Finish/" + item.id }
+                      },
+                      [_vm._v("查看結果\n                    ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary btn-block",
+                        attrs: { to: "/view/AnswerRecord/" + item.id }
+                      },
+                      [_vm._v("填答紀錄\n                    ")]
                     )
-                  ])
-                ])
+                  ],
+                  1
+                )
               ])
             }),
             0
@@ -45060,7 +44840,7 @@ var render = function() {
           staticClass: "btn btn-primary w-50 mr-2",
           on: { click: _vm.prevIndex }
         },
-        [_vm._v("\n            上一題\n        ")]
+        [_vm._v("\n      上一題\n    ")]
       ),
       _vm._v(" "),
       _c(
@@ -45069,7 +44849,7 @@ var render = function() {
           staticClass: "btn btn-primary w-50 mr-2",
           on: { click: _vm.nextIndex }
         },
-        [_vm._v("\n            下一題\n        ")]
+        [_vm._v("\n      下一題\n    ")]
       )
     ]),
     _vm._v(" "),
@@ -45082,14 +44862,14 @@ var render = function() {
           _c("div", { staticClass: "card-body" }, [
             _c("h5", { staticClass: "card-title" }, [
               _vm._v(
-                "\n                " +
+                "\n        " +
                   _vm._s(
                     _vm.currentIndex +
                       1 +
                       ". " +
                       _vm.examQuestions.questions[_vm.currentIndex].question
                   ) +
-                  "\n            "
+                  "\n      "
               )
             ]),
             _vm._v(" "),
@@ -45112,9 +44892,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        " +
-                          _vm._s(item.value) +
-                          "\n                    "
+                        "\n            " + _vm._s(item.value) + "\n          "
                       )
                     ]
                   )
@@ -45131,7 +44909,7 @@ var render = function() {
                 staticClass: "btn btn-primary btn-block mb-1",
                 on: { click: _vm.backIndex }
               },
-              [_vm._v("\n                結束查看\n            ")]
+              [_vm._v("\n        結束查看\n      ")]
             )
           ])
         ])
@@ -61666,7 +61444,7 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/api.js ***!
   \*****************************/
-/*! exports provided: userLogin, userLogout, getCategories, getSchoolYear, getSchoolYearQuestions, checkPermission, getUserScores, getScoresDetail, getScoresCount, addScore, createUsers, toggleSchoolYear, toggleExam, toggleAnswerRecord, getUserAnswerRecord, getFullMarks, addSchoolYear */
+/*! exports provided: userLogin, userLogout, getCategories, getSchoolYear, getSchoolYearQuestions, checkPermission, getUserScores, getScoresDetail, createUsers, toggleSchoolYear, toggleAnswerRecord, getUserAnswerRecord */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61679,15 +61457,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkPermission", function() { return checkPermission; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserScores", function() { return getUserScores; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getScoresDetail", function() { return getScoresDetail; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getScoresCount", function() { return getScoresCount; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addScore", function() { return addScore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUsers", function() { return createUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleSchoolYear", function() { return toggleSchoolYear; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleExam", function() { return toggleExam; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleAnswerRecord", function() { return toggleAnswerRecord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserAnswerRecord", function() { return getUserAnswerRecord; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFullMarks", function() { return getFullMarks; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addSchoolYear", function() { return addSchoolYear; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -61741,16 +61514,6 @@ var getScoresDetail = function getScoresDetail(data) {
   return userRequest.post('getScoresDetail', data).then(function (res) {
     return res.data;
   });
-};
-var getScoresCount = function getScoresCount(data) {
-  return userRequest.post('getScoresCount', data).then(function (res) {
-    return res.data;
-  });
-};
-var addScore = function addScore(data) {
-  return userRequest.post('addScore', data).then(function (res) {
-    return res.data;
-  });
 }; // admin request method
 
 var createUsers = function createUsers(data) {
@@ -61759,12 +61522,7 @@ var createUsers = function createUsers(data) {
   });
 };
 var toggleSchoolYear = function toggleSchoolYear(data) {
-  return adminRequest.post('toggleSchoolYear', data).then(function (res) {
-    return res.data;
-  });
-};
-var toggleExam = function toggleExam(data) {
-  return adminRequest.post('toggleExam', data).then(function (res) {
+  return adminRequest.post('switchSchoolYear', data).then(function (res) {
     return res.data;
   });
 };
@@ -61775,16 +61533,6 @@ var toggleAnswerRecord = function toggleAnswerRecord(data) {
 };
 var getUserAnswerRecord = function getUserAnswerRecord(data) {
   return adminRequest.post('getUserAnswerRecord', data).then(function (res) {
-    return res.data;
-  });
-};
-var getFullMarks = function getFullMarks(data) {
-  return adminRequest.get('getFullMarks', data).then(function (res) {
-    return res.data;
-  });
-};
-var addSchoolYear = function addSchoolYear(data) {
-  return adminRequest.post('addSchoolYear', data).then(function (res) {
     return res.data;
   });
 };
@@ -61818,7 +61566,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 Vue.config.productionTip = false;
-Vue.config.devtools = false;
 axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = '/legal_subject';
 /**
  * The following block of code may be used to automatically register your

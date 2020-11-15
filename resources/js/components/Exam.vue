@@ -59,12 +59,7 @@
 
                 <div class="card-body">
                     <h5 class="card-title">
-                        {{
-                        currentIndex +
-                        1 +
-                        ". " +
-                        examQuestions.questions[currentIndex].question
-                        }}
+                        {{ currentIndex + 1 + ". " + examQuestions.questions[currentIndex].question }}
                     </h5>
 
                     <div class="form-group">
@@ -91,7 +86,7 @@
 </template>
 
 <script>
-import {checkPermission} from "../userAPI";
+import {checkPermission, getScoresCount, addScore} from "../api";
 
 export default {
     data() {
@@ -135,7 +130,7 @@ export default {
             if (data == null) {
                 return [];
             } else {
-                data = data.filter((d) => d.isOpen && !d.isFinish);
+                data = data.filter((d) => d.isOpen && !d.isFinish && d.isExam);
                 this.schoolYearId = data[0] == undefined ? 0 : data[0].id;
             }
 
@@ -158,37 +153,32 @@ export default {
     },
     methods: {
         startExam() {
-            swal
-                .fire({
-                    title: "Tips",
-                    text: "測驗中沒有按結束測驗的話成績一律不保存。",
-                    timer: 3000,
-                    timerProgressBar: true,
-                    showConfirmButton: false,
-                })
-                .then(() => {
-                    axios.post("/api/users/getScoresCount", {
-                        id: this.$store.getters.getUser.id,
-                        yearId: this.schoolYearId,
-                        token: this.$store.getters.getUser.token,
-                    }).then((res) => {
-                        if (res.data >= 2) {
-                            swal.fire({
-                                title: "Tips",
-                                text: "測驗次數已經達到兩次。",
-                                timer: 3000,
-                                timerProgressBar: true,
-                                showConfirmButton: false,
-                            });
-                        } else {
-                            this.$store.dispatch(
-                                "getViewSchoolYearData",
-                                this.schoolYearId
-                            );
-                            this.isExam = true;
-                        }
-                    });
+            swal.fire({
+                title: "Tips",
+                text: "測驗中沒有按結束測驗的話成績一律不保存。",
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+            }).then(async () => {
+                let data = await getScoresCount({
+                    id: this.$store.getters.getUser.id,
+                    yearId: this.schoolYearId,
+                    token: this.$store.getters.getUser.token,
                 });
+
+                if (data >= 2) {
+                    swal.fire({
+                        title: "Tips",
+                        text: "測驗次數已經達到兩次。",
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                } else {
+                    await this.$store.dispatch("getViewSchoolYearData", this.schoolYearId);
+                    this.isExam = true;
+                }
+            });
         },
         prevIndex() {
             if (this.currentIndex - 1 < 0) {
@@ -205,48 +195,41 @@ export default {
             }
         },
         judgeAnswer() {
-            swal
-                .fire({
-                    title: "確定要送出了嗎?",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes",
-                })
-                .then((result) => {
-                    if (
-                        result.value &&
-                        this.userAnswers.filter((d) => d === 0).length === 0
-                    ) {
-                        axios
-                            .post("/api/users/addScore", {
-                                category_id: this.categoryId,
-                                year_id: this.schoolYearId,
-                                user_id: this.$store.getters.getUser.id,
-                                userAnswer: this.userAnswers,
-                                questions: this.examQuestions.questions,
-                                token: this.$store.getters.getUser.token,
-                            })
-                            .then(() => {
-                                swal
-                                    .fire({
-                                        text: "成績傳送完成。",
-                                        icon: "success",
-                                        showConfirmButton: false,
-                                        timer: 1500,
-                                    })
-                                    .then(() => {
-                                        this.$router.push("/Scores");
-                                    });
-                            });
-                    } else if (result.value) {
-                        swal.fire({
-                            text: "尚未有題目還未填寫。",
-                            icon: "error",
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                    }
-                });
+            swal.fire({
+                title: "確定要送出了嗎?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+            }).then(async (result) => {
+                let answerIsFullUp = this.userAnswers.filter((d) => d === 0).length === 0;
+
+                if (result.value && answerIsFullUp) {
+                    await addScore({
+                        category_id: this.categoryId,
+                        year_id: this.schoolYearId,
+                        user_id: this.$store.getters.getUser.id,
+                        userAnswer: this.userAnswers,
+                        questions: this.examQuestions.questions,
+                        token: this.$store.getters.getUser.token,
+                    });
+
+                    swal.fire({
+                        text: "成績傳送完成。",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    }).then(() => {
+                        this.$router.push("/Scores");
+                    });
+                } else if (result.value) {
+                    swal.fire({
+                        text: "尚未有題目還未填寫。",
+                        icon: "error",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            });
         },
         fillAnswer() {
             this.examQuestions.options.forEach((d, i) => {

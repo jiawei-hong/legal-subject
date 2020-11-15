@@ -13,6 +13,7 @@ window.Vue = require('vue');
 window.swal = require('sweetalert2');
 
 Vue.config.productionTip = false;
+Vue.config.devtools = false;
 
 Axios.defaults.baseURL = '/legal_subject';
 

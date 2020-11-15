@@ -25,41 +25,47 @@
 </template>
 
 <script>
+import {getFullMarks} from "../api";
+
 export default {
-    data(){
-      return {
-          result:null
-      }
+    data() {
+        return {
+            result: null
+        }
     },
-    mounted() {
+    async mounted() {
         let id = this.$route.params.id;
 
-        axios.post(`api/getFullMarks/${id}`,{
-            token:this.$store.getters.getUser.token
-        }).then(res => this.result = res.data);
+        this.result = await getFullMarks({
+            params:{
+                year_id: id,
+                token: this.$store.getters.getUser.token
+            }
+        });
     },
     methods: {
         downloadXlsx() {
-            axios
-                .get(`/api/fullMarks/${this.$route.params.id}`, {
-                    headers: {
-                        "Content-Disposition": "attachment; filename=template.xlsx",
-                        "Content-Type":
-                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    },
-                    responseType: "arraybuffer",
-                    params: {
-                        token: this.$store.getters.getUser.token,
-                    },
-                })
-                .then((response) => {
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement("a");
-                    link.href = url;
-                    link.setAttribute("download", "template.xlsx");
-                    document.body.appendChild(link);
-                    link.click();
-                });
+            let id = this.$route.params.id;
+
+            axios.get(`/api/fullMarks/${id}`, {
+                headers: {
+                    "Content-Disposition": "attachment; filename=template.xlsx",
+                    "Content-Type":
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                },
+                responseType: "blob",
+                params:{
+                    year_id:id,
+                    token: this.$store.getters.getUser.token
+                }
+            }).then((response) => {
+                const url = window.URL.createObjectURL(response.data);
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", "template.xlsx");
+                document.body.appendChild(link);
+                link.click();
+            });
         },
     },
 };

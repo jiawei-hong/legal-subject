@@ -18,17 +18,18 @@ Route::namespace('api')->group(function(){
     Route::middleware('admin')->group(function(){
         Route::get('xlsx/{id}','ApiController@export');
         Route::get('fullMarks/{id}','ApiController@fullMarksExport');
-        Route::post('getFullMarks/{id}','ApiController@getFullMarks');
-        Route::post('addSchoolYear','ApiController@addSchoolYear');
-        Route::post('switchSchoolYear','ApiController@switchSchoolYear');
         Route::post('getFinishData','ApiController@getFinishData');
         Route::post('importQuestion','ApiController@importQuestion');
-        Route::post('createUsers','ApiController@createUsers');
+        Route::post('createUsers','ApiController@importUsers');
     });
 
     Route::middleware('admin')->prefix('admin')->group(function(){
-        Route::post('switchSchoolYear','ApiController@switchSchoolYear');
+        Route::get('getFullMarks','ApiController@getFullMarks');
+        Route::post('addSchoolYear','ApiController@addSchoolYear');
         Route::post('getUserAnswerRecord','ApiController@getUserAnswerRecord');
+        Route::post('toggleSchoolYear','ApiController@toggleSchoolYear');
+        Route::post('toggleExam','ApiController@toggleExam');
+        Route::post('toggleAnswerRecord','ApiController@toggleAnswerRecord');
     });
 
     Route::middleware('student')->prefix('users')->group(function(){
