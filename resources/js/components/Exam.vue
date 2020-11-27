@@ -130,7 +130,7 @@ export default {
             if (data == null) {
                 return [];
             } else {
-                data = data.filter((d) => d.isOpen && !d.isFinish && d.isExam);
+                data = data.filter((d) => !d.isFinish && d.isExam);
                 this.schoolYearId = data[0] == undefined ? 0 : data[0].id;
             }
 
@@ -204,7 +204,7 @@ export default {
                 let answerIsFullUp = this.userAnswers.filter((d) => d === 0).length === 0;
 
                 if (result.value && answerIsFullUp) {
-                    await addScore({
+                    let result = await addScore({
                         category_id: this.categoryId,
                         year_id: this.schoolYearId,
                         user_id: this.$store.getters.getUser.id,
@@ -214,12 +214,12 @@ export default {
                     });
 
                     swal.fire({
-                        text: "成績傳送完成。",
-                        icon: "success",
+                        text: result.msg,
+                        icon: result.status ? 'success' : 'error',
                         showConfirmButton: false,
                         timer: 1500,
                     }).then(() => {
-                        this.$router.push("/Scores");
+                        this.$router.push(result.status ? "/Scores" : '/');
                     });
                 } else if (result.value) {
                     swal.fire({

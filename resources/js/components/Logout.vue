@@ -14,8 +14,8 @@ export default {
     });
 
     await userLogout({ token: this.$store.getters.getUser.token });
-    this.$store.dispatch("logout");
-    this.$router.push("/");
+    await this.$store.dispatch("logout");
+    await this.$router.push("/");
   },
 };
 </script>

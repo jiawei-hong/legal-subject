@@ -19,6 +19,7 @@ use App\Scores;
 use App\Record;
 use App\Classname;
 use Excel;
+use PhpOffice\PhpSpreadsheet\Shared\JAMA\CholeskyDecomposition;
 use Storage;
 
 set_time_limit(0);
@@ -141,29 +142,43 @@ class ApiController extends Controller
     }
 
     public function addScore(Request $request){
-        $data = collect([]);
-        $scoreData = collect($request->questions)->map(function($d,$i) use ($request,$data) {
-            return $this->getAnswer($d['id'])->option_id == $request->userAnswer[$i];
-        });
+        $query = Scores::where([
+            ['category_id','=',$request->category_id],
+            ['user_id','=',$request->user_id],
+            ['year_id','=',$request->year_id]
+        ])->count();
 
-        $score = Scores::create([
-            'category_id' => $request->category_id,
-            'user_id' => $request->user_id,
-            'year_id' => $request->year_id,
-            'score' => count($scoreData->filter(fn($d) => $d === TRUE)) * 2
-        ]);
+        if($query < 2){
+            $data = collect([]);
+            $scoreData = collect($request->questions)->map(function($d,$i) use ($request,$data) {
+                return $this->getAnswer($d['id'])->option_id == $request->userAnswer[$i];
+            });
 
-        foreach($request->questions as $key => $data){
-            Record::create([
-                's_id' => $score->id,
-                'question_id' => $data['id'],
-                'correct' => $scoreData[$key]
+            $score = Scores::create([
+                'category_id' => $request->category_id,
+                'user_id' => $request->user_id,
+                'year_id' => $request->year_id,
+                'score' => count($scoreData->filter(fn($d) => $d)) * 2
+            ]);
+
+            foreach($request->questions as $key => $data){
+                Record::create([
+                    's_id' => $score->id,
+                    'question_id' => $data['id'],
+                    'correct' => $scoreData[$key]
+                ]);
+            }
+
+            return response()->json([
+                'status' => true,
+                'msg' => '成績保存成功。'
             ]);
         }
 
-        return User::all()->map(function($user){
-            return Scores::where('user_id',$user->id)->OrderBy('score','desc')->first();
-        });
+        return response()->json([
+            'status' => false,
+            'msg' => '測驗次數已經達到兩次。'
+        ]);
     }
 
     public function getScoresCount(Request $request){
@@ -413,7 +428,7 @@ class ApiController extends Controller
                 'studentNumber' => $user['account'],
                 'studentName' => $user['username'],
             ];
-        });
+        })->unique('id');
     }
 
     public function getScoresDetail(Request $request){
@@ -464,6 +479,10 @@ class ApiController extends Controller
     }
 
     public function toggleAnswerRecord(Request $request){
+        collect(SchoolYear::all())->map(function($d){
+            $d->update(['isAnswerRecord' => 0]);
+        });
+
         SchoolYear::where('id',$request->id)->update([
             'isAnswerRecord' => !$request->bool
         ]);
@@ -474,6 +493,10 @@ class ApiController extends Controller
     }
 
     public function toggleExam(Request $request){
+        collect(SchoolYear::all())->map(function($d){
+            $d->update(['isExam' => 0]);
+        });
+
         SchoolYear::where('id',$request->id)->update([
             'isExam' => !$request->bool
         ]);

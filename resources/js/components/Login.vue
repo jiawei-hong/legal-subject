@@ -11,6 +11,7 @@
             class="form-control"
             v-model="account"
             placeholder="請輸入帳號"
+            @keypress.enter="loginProcess"
           />
         </div>
 
@@ -21,6 +22,7 @@
             class="form-control"
             v-model="password"
             placeholder="請輸入密碼"
+            @keypress.enter="loginProcess"
           />
         </div>
 
