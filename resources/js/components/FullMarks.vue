@@ -7,14 +7,12 @@
         <div class="container mt-3">
             <div class="scoreboard">
                 <div class="item">
-                    <span>#</span>
                     <span>班級名稱</span>
                     <span>學生學號</span>
                     <span>學生姓名</span>
                 </div>
 
                 <div v-for="(item, index) in result" class="item">
-                    <span>{{ index + 1 }}</span>
                     <span>{{ item['className'] }}</span>
                     <span>{{ item['studentNumber'] }}</span>
                     <span>{{ item['studentName'] }}</span>

@@ -149,8 +149,7 @@ class ApiController extends Controller
         ])->count();
 
         if($query < 2){
-            $data = collect([]);
-            $scoreData = collect($request->questions)->map(function($d,$i) use ($request,$data) {
+            $scoreData = collect($request->questions)->map(function($d,$i) use ($request) {
                 return $this->getAnswer($d['id'])->option_id == $request->userAnswer[$i];
             });
 
@@ -420,7 +419,7 @@ class ApiController extends Controller
             ['year_id','=',$request->year_id],
             ['score','=',100]
         ])->get())->map(function($d){
-            $user = User::where('id',$d->user_id)->get()->first();
+            $user = User::where('id',$d->user_id)->first();
             $class = Classname::where('id',$user->class_id)->first();
 
             return [
@@ -428,7 +427,7 @@ class ApiController extends Controller
                 'studentNumber' => $user['account'],
                 'studentName' => $user['username'],
             ];
-        })->unique('id');
+        })->unique('studentNumber');
     }
 
     public function getScoresDetail(Request $request){

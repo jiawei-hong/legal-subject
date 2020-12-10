@@ -2328,6 +2328,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      examTimer: null,
       isExam: false,
       schoolYearId: 0,
       categoryId: 0,
@@ -2420,13 +2421,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         timer: 3000,
         timerProgressBar: true,
         showConfirmButton: false
-      }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var data, examTimerSeconds;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
+                _context3.next = 2;
                 return Object(_api__WEBPACK_IMPORTED_MODULE_1__["getScoresCount"])({
                   id: _this2.$store.getters.getUser.id,
                   yearId: _this2.schoolYearId,
@@ -2434,10 +2435,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 2:
-                data = _context2.sent;
+                data = _context3.sent;
 
                 if (!(data >= 2)) {
-                  _context2.next = 7;
+                  _context3.next = 7;
                   break;
                 }
 
@@ -2448,22 +2449,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   timerProgressBar: true,
                   showConfirmButton: false
                 });
-                _context2.next = 10;
+                _context3.next = 12;
                 break;
 
               case 7:
-                _context2.next = 9;
+                _context3.next = 9;
                 return _this2.$store.dispatch("getViewSchoolYearData", _this2.schoolYearId);
 
               case 9:
+                examTimerSeconds = 0;
                 _this2.isExam = true;
+                _this2.examTimer = setInterval( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+                  var result;
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          if (!(Math.floor(examTimerSeconds / 60) >= 40)) {
+                            _context2.next = 8;
+                            break;
+                          }
 
-              case 10:
+                          clearInterval(_this2.examTimer);
+                          _context2.next = 4;
+                          return Object(_api__WEBPACK_IMPORTED_MODULE_1__["addScore"])({
+                            category_id: _this2.categoryId,
+                            year_id: _this2.schoolYearId,
+                            user_id: _this2.$store.getters.getUser.id,
+                            userAnswer: _this2.userAnswers,
+                            questions: _this2.examQuestions.questions,
+                            token: _this2.$store.getters.getUser.token
+                          });
+
+                        case 4:
+                          result = _context2.sent;
+                          swal.fire({
+                            text: result.msg,
+                            icon: result.status ? 'success' : 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                          }).then(function () {
+                            _this2.$router.push(result.status ? "/Scores" : '/');
+                          });
+                          _context2.next = 9;
+                          break;
+
+                        case 8:
+                          examTimerSeconds++;
+
+                        case 9:
+                        case "end":
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2);
+                })), 1000);
+
+              case 12:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       })));
     },
     prevIndex: function prevIndex() {
@@ -2489,23 +2536,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         showCancelButton: true,
         confirmButtonText: "Yes"
       }).then( /*#__PURE__*/function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(result) {
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(result) {
           var answerIsFullUp, _result;
 
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context4.prev = _context4.next) {
                 case 0:
                   answerIsFullUp = _this3.userAnswers.filter(function (d) {
                     return d === 0;
                   }).length === 0;
 
                   if (!(result.value && answerIsFullUp)) {
-                    _context3.next = 8;
+                    _context4.next = 8;
                     break;
                   }
 
-                  _context3.next = 4;
+                  _context4.next = 4;
                   return Object(_api__WEBPACK_IMPORTED_MODULE_1__["addScore"])({
                     category_id: _this3.categoryId,
                     year_id: _this3.schoolYearId,
@@ -2516,7 +2563,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
 
                 case 4:
-                  _result = _context3.sent;
+                  _result = _context4.sent;
                   swal.fire({
                     text: _result.msg,
                     icon: _result.status ? 'success' : 'error',
@@ -2525,7 +2572,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }).then(function () {
                     _this3.$router.push(_result.status ? "/Scores" : '/');
                   });
-                  _context3.next = 9;
+                  _context4.next = 9;
                   break;
 
                 case 8:
@@ -2540,14 +2587,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 case 9:
                 case "end":
-                  return _context3.stop();
+                  return _context4.stop();
               }
             }
-          }, _callee3);
+          }, _callee4);
         }));
 
         return function (_x) {
-          return _ref2.apply(this, arguments);
+          return _ref3.apply(this, arguments);
         };
       }());
     },
@@ -2815,8 +2862,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
 //
 //
 //
@@ -44093,8 +44138,6 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.result, function(item, index) {
             return _c("div", { staticClass: "item" }, [
-              _c("span", [_vm._v(_vm._s(index + 1))]),
-              _vm._v(" "),
               _c("span", [_vm._v(_vm._s(item["className"]))]),
               _vm._v(" "),
               _c("span", [_vm._v(_vm._s(item["studentNumber"]))]),
@@ -44114,8 +44157,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "item" }, [
-      _c("span", [_vm._v("#")]),
-      _vm._v(" "),
       _c("span", [_vm._v("班級名稱")]),
       _vm._v(" "),
       _c("span", [_vm._v("學生學號")]),

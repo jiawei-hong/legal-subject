@@ -91,6 +91,7 @@ import {checkPermission, getScoresCount, addScore} from "../api";
 export default {
     data() {
         return {
+            examTimer:null,
             isExam: false,
             schoolYearId: 0,
             categoryId: 0,
@@ -176,7 +177,35 @@ export default {
                     });
                 } else {
                     await this.$store.dispatch("getViewSchoolYearData", this.schoolYearId);
+                    let examTimerSeconds = 0;
+
                     this.isExam = true;
+
+                    this.examTimer = setInterval(async () => {
+                        if(Math.floor(examTimerSeconds / 60) >= 40 ){
+                            clearInterval(this.examTimer);
+
+                            let result = await addScore({
+                                category_id: this.categoryId,
+                                year_id: this.schoolYearId,
+                                user_id: this.$store.getters.getUser.id,
+                                userAnswer: this.userAnswers,
+                                questions: this.examQuestions.questions,
+                                token: this.$store.getters.getUser.token,
+                            });
+
+                            swal.fire({
+                                text: result.msg,
+                                icon: result.status ? 'success' : 'error',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            }).then(() => {
+                                this.$router.push(result.status ? "/Scores" : '/');
+                            });
+                        }else{
+                            examTimerSeconds++;
+                        }
+                    },1000)
                 }
             });
         },
