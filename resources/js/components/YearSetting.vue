@@ -71,6 +71,25 @@
                                 </router-link>
                             </div>
                         </div>
+
+                        <div class="dropdown mb-1">
+                            <button class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                時間功能
+                            </button>
+
+                            <div class="dropdown-menu mb-3 text-center btn-block">
+                                <router-link
+                                    class="btn btn-primary w-75 mb-1"
+                                    :to="'/createTime/' + item.id"
+                                >創建時間
+                                </router-link>
+                                <router-link
+                                    class="btn btn-primary w-75 mb-1"
+                                    :to="'/modifyTime/' + item.id"
+                                >修改時間
+                                </router-link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

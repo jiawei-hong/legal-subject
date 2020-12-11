@@ -57,6 +57,14 @@ let routes = [
         component: require('./components/AnswerRecord').default
     },
     {
+        path:'/createTime/:id',
+        component: require('./components/createTime').default
+    },
+    {
+        path:'/modifyTime/:id',
+        component: require('./components/modifyTime').default
+    },
+    {
         path:'*',
         redirect:'/'
     }

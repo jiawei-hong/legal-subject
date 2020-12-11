@@ -3667,6 +3667,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3802,6 +3821,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTime.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/createTime.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      subjectDate: null,
+      examDate: null,
+      scoreDate: null
+    };
   }
 });
 
@@ -44357,7 +44440,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "mb-2" }, [
-          _vm._v("\n        帳號：\n        "),
+          _vm._v("\n                帳號：\n                "),
           _c("input", {
             directives: [
               {
@@ -44391,7 +44474,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "mb-2" }, [
-          _vm._v("\n        密碼：\n        "),
+          _vm._v("\n                密碼：\n                "),
           _c("input", {
             directives: [
               {
@@ -44431,7 +44514,7 @@ var render = function() {
               staticClass: "btn btn-primary w-50 mr-1",
               on: { click: _vm.loginProcess }
             },
-            [_vm._v("\n          登入\n        ")]
+            [_vm._v("\n                    登入\n                ")]
           ),
           _vm._v(" "),
           _c(
@@ -44440,7 +44523,7 @@ var render = function() {
               staticClass: "btn btn-primary w-50 mr-1",
               on: { click: _vm.resetProcess }
             },
-            [_vm._v("\n          重設\n        ")]
+            [_vm._v("\n                    重設\n                ")]
           )
         ])
       ])
@@ -45071,6 +45154,54 @@ var render = function() {
                       ],
                       1
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "dropdown mb-1" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-primary dropdown-toggle btn-block",
+                        attrs: {
+                          type: "button",
+                          "data-toggle": "dropdown",
+                          "aria-haspopup": "true",
+                          "aria-expanded": "false"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            時間功能\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu mb-3 text-center btn-block"
+                      },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-primary w-75 mb-1",
+                            attrs: { to: "/createTime/" + item.id }
+                          },
+                          [_vm._v("創建時間\n                            ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-primary w-75 mb-1",
+                            attrs: { to: "/modifyTime/" + item.id }
+                          },
+                          [_vm._v("修改時間\n                            ")]
+                        )
+                      ],
+                      1
+                    )
                   ])
                 ])
               ])
@@ -45093,6 +45224,124 @@ var staticRenderFns = [
         _c("div", { staticClass: "card-text ml-5" }, [
           _vm._v("目前沒有任何的學年度。")
         ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTime.vue?vue&type=template&id=faf36418&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/createTime.vue?vue&type=template&id=faf36418& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("登入")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "mb-2" }, [
+          _vm._v("\n                開放題庫時間：\n                "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.subjectDate,
+                expression: "subjectDate"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.subjectDate },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.subjectDate = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-2" }, [
+          _vm._v("\n                開放測驗時間：\n                "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.examDate,
+                expression: "examDate"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.examDate },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.examDate = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-2" }, [
+          _vm._v("\n                查看分數時間：\n                "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.scoreDate,
+                expression: "scoreDate"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.scoreDate },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.scoreDate = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2 text-center d-flex" }, [
+      _c("button", { staticClass: "btn btn-primary btn-block" }, [
+        _vm._v("\n                    創建時間\n                ")
       ])
     ])
   }
@@ -62858,6 +63107,107 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/createTime.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/createTime.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createTime.vue?vue&type=template&id=faf36418& */ "./resources/js/components/createTime.vue?vue&type=template&id=faf36418&");
+/* harmony import */ var _createTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createTime.vue?vue&type=script&lang=js& */ "./resources/js/components/createTime.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _createTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/createTime.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/createTime.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/createTime.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./createTime.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTime.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/createTime.vue?vue&type=template&id=faf36418&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/createTime.vue?vue&type=template&id=faf36418& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./createTime.vue?vue&type=template&id=faf36418& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTime.vue?vue&type=template&id=faf36418&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modifyTime.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/modifyTime.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+component.options.__file = "resources/js/components/modifyTime.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/viewSchoolYear.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/viewSchoolYear.vue ***!
@@ -62981,6 +63331,12 @@ var routes = [{
 }, {
   path: '/view/AnswerRecord/:id',
   component: __webpack_require__(/*! ./components/AnswerRecord */ "./resources/js/components/AnswerRecord.vue")["default"]
+}, {
+  path: '/createTime/:id',
+  component: __webpack_require__(/*! ./components/createTime */ "./resources/js/components/createTime.vue")["default"]
+}, {
+  path: '/modifyTime/:id',
+  component: __webpack_require__(/*! ./components/modifyTime */ "./resources/js/components/modifyTime.vue")["default"]
 }, {
   path: '*',
   redirect: '/'
