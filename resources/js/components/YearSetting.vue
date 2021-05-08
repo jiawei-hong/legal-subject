@@ -4,7 +4,7 @@
             <router-link class="btn btn-primary btn-block" to="createSchoolYear">新增學年度</router-link>
         </div>
 
-        <div v-if="schoolYear">
+        <div v-if="schoolYear" class="mt-2">
             <div class="card-columns">
                 <div class="card" v-for="item in schoolYear">
                     <div class="card-header text-center">
@@ -73,9 +73,9 @@
                         </div>
 
                         <div class="dropdown mb-1">
-                            <button class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                時間功能
-                            </button>
+<!--                            <button class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                時間功能-->
+<!--                            </button>-->
 
                             <div class="dropdown-menu mb-3 text-center btn-block">
                                 <router-link

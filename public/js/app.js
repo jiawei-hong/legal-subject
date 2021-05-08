@@ -3826,70 +3826,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTime.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/createTime.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      subjectDate: null,
-      examDate: null,
-      scoreDate: null
-    };
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/viewSchoolYear.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/viewSchoolYear.vue?vue&type=script&lang=js& ***!
@@ -43583,22 +43519,22 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c(
-      "div",
-      { staticClass: "scoreboard" },
+      "table",
+      { staticClass: "scoreboard table table-dark" },
       [
         _vm._m(1),
         _vm._v(" "),
         _vm._l(_vm.result, function(item, index) {
-          return _c("div", { staticClass: "item" }, [
-            _c("span", [_vm._v(_vm._s(index + 1))]),
+          return _c("tr", { staticClass: "item" }, [
+            _c("td", [_vm._v(_vm._s(index + 1))]),
             _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(item.student_class))]),
+            _c("td", [_vm._v(_vm._s(item.student_class))]),
             _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(item.student_number))]),
+            _c("td", [_vm._v(_vm._s(item.student_number))]),
             _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(item.student_name))]),
+            _c("td", [_vm._v(_vm._s(item.student_name))]),
             _vm._v(" "),
-            _c("span", [
+            _c("td", [
               _vm._v(
                 _vm._s(
                   Object.keys(item.record[0]).indexOf("score") != -1
@@ -43608,7 +43544,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("span", [
+            _c("td", [
               _vm._v(
                 _vm._s(
                   Object.keys(item.record[1]).indexOf("score") != -1
@@ -43637,18 +43573,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item" }, [
-      _c("span", [_vm._v("#")]),
+    return _c("tr", { staticClass: "item" }, [
+      _c("td", [_vm._v("#")]),
       _vm._v(" "),
-      _c("span", [_vm._v("班級")]),
+      _c("td", [_vm._v("班級")]),
       _vm._v(" "),
-      _c("span", [_vm._v("學號")]),
+      _c("td", [_vm._v("學號")]),
       _vm._v(" "),
-      _c("span", [_vm._v("姓名")]),
+      _c("td", [_vm._v("姓名")]),
       _vm._v(" "),
-      _c("span", [_vm._v("作答一")]),
+      _c("td", [_vm._v("作答一")]),
       _vm._v(" "),
-      _c("span", [_vm._v("作答二")])
+      _c("td", [_vm._v("作答二")])
     ])
   }
 ]
@@ -44970,7 +44906,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _vm.schoolYear
-      ? _c("div", [
+      ? _c("div", { staticClass: "mt-2" }, [
           _c(
             "div",
             { staticClass: "card-columns" },
@@ -44978,9 +44914,9 @@ var render = function() {
               return _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header text-center" }, [
                   _vm._v(
-                    "\n                    " +
+                    "\n                        " +
                       _vm._s(item.year) +
-                      "\n                "
+                      "\n                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -45000,7 +44936,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            開關功能\n                        "
+                          "\n                                開關功能\n                            "
                         )
                       ]
                     ),
@@ -45027,11 +44963,11 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                " +
+                              "\n                                    " +
                                 _vm._s(
                                   !item.isOpen ? "開啟題庫查看" : "關閉題庫查看"
                                 ) +
-                                "\n                            "
+                                "\n                                "
                             )
                           ]
                         ),
@@ -45049,11 +44985,11 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                " +
+                              "\n                                    " +
                                 _vm._s(
                                   !item.isExam ? "開啟題庫測驗" : "關閉題庫測驗"
                                 ) +
-                                "\n                            "
+                                "\n                                "
                             )
                           ]
                         ),
@@ -45076,13 +45012,13 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                " +
+                              "\n                                    " +
                                 _vm._s(
                                   !item.isAnswerRecord
                                     ? "開啟詳細資料"
                                     : "關閉詳細資料"
                                 ) +
-                                "\n                            "
+                                "\n                                "
                             )
                           ]
                         )
@@ -45105,7 +45041,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            查看功能\n                        "
+                          "\n                                查看功能\n                            "
                         )
                       ]
                     ),
@@ -45122,7 +45058,7 @@ var render = function() {
                             staticClass: "btn btn-primary w-75 mb-1",
                             attrs: { to: "/view/SchoolYear/" + item.id }
                           },
-                          [_vm._v("查看題庫\n                            ")]
+                          [_vm._v("查看題庫\n                                ")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -45131,7 +45067,7 @@ var render = function() {
                             staticClass: "btn btn-primary w-75 mb-1",
                             attrs: { to: "/view/FullMarks/" + item.id }
                           },
-                          [_vm._v("查看滿分\n                            ")]
+                          [_vm._v("查看滿分\n                                ")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -45140,7 +45076,7 @@ var render = function() {
                             staticClass: "btn btn-primary w-75 mb-1",
                             attrs: { to: "/view/Finish/" + item.id }
                           },
-                          [_vm._v("查看結果\n                            ")]
+                          [_vm._v("查看結果\n                                ")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -45149,7 +45085,7 @@ var render = function() {
                             staticClass: "btn btn-primary w-75 mb-1",
                             attrs: { to: "/view/AnswerRecord/" + item.id }
                           },
-                          [_vm._v("填答紀錄\n                            ")]
+                          [_vm._v("填答紀錄\n                                ")]
                         )
                       ],
                       1
@@ -45157,25 +45093,6 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "dropdown mb-1" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-primary dropdown-toggle btn-block",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "dropdown",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            時間功能\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
                     _c(
                       "div",
                       {
@@ -45188,7 +45105,7 @@ var render = function() {
                             staticClass: "btn btn-primary w-75 mb-1",
                             attrs: { to: "/createTime/" + item.id }
                           },
-                          [_vm._v("創建時間\n                            ")]
+                          [_vm._v("創建時間\n                                ")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -45197,7 +45114,7 @@ var render = function() {
                             staticClass: "btn btn-primary w-75 mb-1",
                             attrs: { to: "/modifyTime/" + item.id }
                           },
-                          [_vm._v("修改時間\n                            ")]
+                          [_vm._v("修改時間\n                                ")]
                         )
                       ],
                       1
@@ -45224,124 +45141,6 @@ var staticRenderFns = [
         _c("div", { staticClass: "card-text ml-5" }, [
           _vm._v("目前沒有任何的學年度。")
         ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTime.vue?vue&type=template&id=faf36418&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/createTime.vue?vue&type=template&id=faf36418& ***!
-  \*************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("登入")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "mb-2" }, [
-          _vm._v("\n                開放題庫時間：\n                "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.subjectDate,
-                expression: "subjectDate"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date" },
-            domProps: { value: _vm.subjectDate },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.subjectDate = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-2" }, [
-          _vm._v("\n                開放測驗時間：\n                "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.examDate,
-                expression: "examDate"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date" },
-            domProps: { value: _vm.examDate },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.examDate = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-2" }, [
-          _vm._v("\n                查看分數時間：\n                "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.scoreDate,
-                expression: "scoreDate"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date" },
-            domProps: { value: _vm.scoreDate },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.scoreDate = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-2 text-center d-flex" }, [
-      _c("button", { staticClass: "btn btn-primary btn-block" }, [
-        _vm._v("\n                    創建時間\n                ")
       ])
     ])
   }
@@ -62119,6 +61918,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -62128,12 +61929,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-Vue.config.productionTip = false;
-Vue.config.devtools = false;
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.config.productionTip = false;
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.config.devtools = false;
 axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = '/legal_subject';
 /**
  * The following block of code may be used to automatically register your
@@ -62146,14 +61948,14 @@ axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = '/legal_subject'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('navbar', __webpack_require__(/*! ./components/Navbar */ "./resources/js/components/Navbar.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('navbar', __webpack_require__(/*! ./components/Navbar */ "./resources/js/components/Navbar.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_0__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -63107,107 +62909,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/createTime.vue":
-/*!************************************************!*\
-  !*** ./resources/js/components/createTime.vue ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createTime.vue?vue&type=template&id=faf36418& */ "./resources/js/components/createTime.vue?vue&type=template&id=faf36418&");
-/* harmony import */ var _createTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createTime.vue?vue&type=script&lang=js& */ "./resources/js/components/createTime.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _createTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/createTime.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/createTime.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/createTime.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./createTime.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTime.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/createTime.vue?vue&type=template&id=faf36418&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/createTime.vue?vue&type=template&id=faf36418& ***!
-  \*******************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./createTime.vue?vue&type=template&id=faf36418& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTime.vue?vue&type=template&id=faf36418&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTime_vue_vue_type_template_id_faf36418___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/modifyTime.vue":
-/*!************************************************!*\
-  !*** ./resources/js/components/modifyTime.vue ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-component.options.__file = "resources/js/components/modifyTime.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/viewSchoolYear.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/viewSchoolYear.vue ***!
@@ -63331,13 +63032,15 @@ var routes = [{
 }, {
   path: '/view/AnswerRecord/:id',
   component: __webpack_require__(/*! ./components/AnswerRecord */ "./resources/js/components/AnswerRecord.vue")["default"]
-}, {
-  path: '/createTime/:id',
-  component: __webpack_require__(/*! ./components/createTime */ "./resources/js/components/createTime.vue")["default"]
-}, {
-  path: '/modifyTime/:id',
-  component: __webpack_require__(/*! ./components/modifyTime */ "./resources/js/components/modifyTime.vue")["default"]
-}, {
+}, // {
+//     path:'/createTime/:id',
+//     component: require('./components/createTime').default
+// },
+// {
+//     path:'/modifyTime/:id',
+//     component: require('./components/modifyTime').default
+// },
+{
   path: '*',
   redirect: '/'
 }];

@@ -6,6 +6,7 @@
 import router from './router';
 import store from './store';
 import Axios from 'axios';
+import Vue from "vue";
 
 require('./bootstrap');
 

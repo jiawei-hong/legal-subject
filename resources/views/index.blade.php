@@ -12,7 +12,7 @@
         <div id="app">
             <navbar></navbar>
 
-            <div class="container">
+            <div class="container mt-2">
                 <router-view></router-view>
             </div>
         </div>

@@ -14,29 +14,29 @@
             </select>
         </div>
 
-        <div class="scoreboard">
-            <div class="item">
-                <span>#</span>
-                <span>班級</span>
-                <span>學號</span>
-                <span>姓名</span>
-                <span>作答一</span>
-                <span>作答二</span>
-            </div>
+        <table class="scoreboard table table-dark">
+            <tr class="item">
+                <td>#</td>
+                <td>班級</td>
+                <td>學號</td>
+                <td>姓名</td>
+                <td>作答一</td>
+                <td>作答二</td>
+            </tr>
 
-            <div v-for="(item, index) in result" class="item">
-                <span>{{ index + 1 }}</span>
-                <span>{{ item.student_class }}</span>
-                <span>{{ item.student_number }}</span>
-                <span>{{ item.student_name }}</span>
-                <span>{{
+            <tr v-for="(item, index) in result" class="item">
+                <td>{{ index + 1 }}</td>
+                <td>{{ item.student_class }}</td>
+                <td>{{ item.student_number }}</td>
+                <td>{{ item.student_name }}</td>
+                <td>{{
                         Object.keys(item.record[0]).indexOf('score') != -1 ? item.record[0].score : item.record[0]
-                    }}</span>
-                <span>{{
+                    }}</td>
+                <td>{{
                         Object.keys(item.record[1]).indexOf('score') != -1 ? item.record[1].score : item.record[1]
-                    }}</span>
-            </div>
-        </div>
+                    }}</td>
+            </tr>
+        </table>
     </div>
 </template>
 
