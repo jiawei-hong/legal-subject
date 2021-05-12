@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>法律常識</title>
-        <link rel="stylesheet" href="/legal_subject/css/app.css">
+        <link rel="stylesheet" href="/legal_subject/public/css/app.css">
     </head>
 
     <body>
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <script src="/legal_subject/js/app.js"></script>
+        <script src="/legal_subject/public/js/app.js"></script>
     </body>
 
 </html>

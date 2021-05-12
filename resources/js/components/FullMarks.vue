@@ -5,19 +5,19 @@
         </button>
 
         <div class="container mt-3">
-            <div class="scoreboard">
-                <div class="item">
-                    <span>班級名稱</span>
-                    <span>學生學號</span>
-                    <span>學生姓名</span>
-                </div>
+            <table class="scoreboard text-center table table-bordered table-striped">
+                <tr class="item">
+                    <td>班級名稱</td>
+                    <td>學生學號</td>
+                    <td>學生姓名</td>
+                </tr>
 
-                <div v-for="(item, index) in result" class="item">
-                    <span>{{ item['className'] }}</span>
-                    <span>{{ item['studentNumber'] }}</span>
-                    <span>{{ item['studentName'] }}</span>
-                </div>
-            </div>
+                <tr v-for="(item, index) in result" class="item">
+                    <td>{{ item['className'] }}</td>
+                    <td>{{ item['studentNumber'] }}</td>
+                    <td>{{ item['studentName'] }}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>

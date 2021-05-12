@@ -2759,14 +2759,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -44052,11 +44044,13 @@ var render = function() {
                         _vm._v(
                           "\n                                " +
                             _vm._s(
-                              (_vm.recordData[_vm.currentIndex].correct /
-                                (_vm.recordData[_vm.currentIndex].correct +
-                                  _vm.recordData[_vm.currentIndex].incorrect)) *
-                                100 +
-                                "%"
+                              (
+                                (_vm.recordData[_vm.currentIndex].correct /
+                                  (_vm.recordData[_vm.currentIndex].correct +
+                                    _vm.recordData[_vm.currentIndex]
+                                      .incorrect)) *
+                                100
+                              ).toFixed(2) + "%"
                             ) +
                             "\n                            "
                         )
@@ -44076,11 +44070,13 @@ var render = function() {
                         _vm._v(
                           "\n                                " +
                             _vm._s(
-                              (_vm.recordData[_vm.currentIndex].incorrect /
-                                (_vm.recordData[_vm.currentIndex].correct +
-                                  _vm.recordData[_vm.currentIndex].incorrect)) *
-                                100 +
-                                "%"
+                              (
+                                (_vm.recordData[_vm.currentIndex].incorrect /
+                                  (_vm.recordData[_vm.currentIndex].correct +
+                                    _vm.recordData[_vm.currentIndex]
+                                      .incorrect)) *
+                                100
+                              ).toFixed(2) + "%"
                             ) +
                             "\n                            "
                         )
@@ -44150,18 +44146,21 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container mt-3" }, [
       _c(
-        "div",
-        { staticClass: "scoreboard" },
+        "table",
+        {
+          staticClass:
+            "scoreboard text-center table table-bordered table-striped"
+        },
         [
           _vm._m(0),
           _vm._v(" "),
           _vm._l(_vm.result, function(item, index) {
-            return _c("div", { staticClass: "item" }, [
-              _c("span", [_vm._v(_vm._s(item["className"]))]),
+            return _c("tr", { staticClass: "item" }, [
+              _c("td", [_vm._v(_vm._s(item["className"]))]),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(item["studentNumber"]))]),
+              _c("td", [_vm._v(_vm._s(item["studentNumber"]))]),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(item["studentName"]))])
+              _c("td", [_vm._v(_vm._s(item["studentName"]))])
             ])
           })
         ],
@@ -44175,12 +44174,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item" }, [
-      _c("span", [_vm._v("班級名稱")]),
+    return _c("tr", { staticClass: "item" }, [
+      _c("td", [_vm._v("班級名稱")]),
       _vm._v(" "),
-      _c("span", [_vm._v("學生學號")]),
+      _c("td", [_vm._v("學生學號")]),
       _vm._v(" "),
-      _c("span", [_vm._v("學生姓名")])
+      _c("td", [_vm._v("學生姓名")])
     ])
   }
 ]
