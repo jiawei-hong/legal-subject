@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Exports\UsersExport;
 use App\Exports\FullMarksExport;
@@ -261,10 +262,10 @@ class ApiController extends Controller
         $user = User::all();
         $exceptUserId = collect([1,2,3,4]);
 
-        foreach ($user as $value) {
-            if($exceptUserId->search($value->id) === false)
-                $value->delete();
-        }
+//        foreach ($user as $value) {
+//            if($exceptUserId->search($value->id) === false)
+//                $value->delete();
+//        }
 
         $filename = time() . '.xlsx';
 
@@ -275,6 +276,10 @@ class ApiController extends Controller
         array_shift($userData);
 
         foreach ($userData as $data) {
+            $user = User::all()->filter(function($d) use ($data){
+                return Hash::check($data[5], $d['password']);
+            });
+
             $dataIsNullCount = collect($data)->filter(function($d){
                 return $d !== null;
             })->count();
@@ -285,14 +290,26 @@ class ApiController extends Controller
             $classData = Classname::where('name',$data[1]);
             $classId = $classData->count() == 0 ? Classname::create(['name' => $data[1]]) : $classData->first();
 
-            User::create([
-                'account' => $data[3],
-                'password' => Hash::make($data[5]),
-                'username' => $data[4],
-                'classnumber' => $data[2],
-                'class_id' => $classId->id,
-                'api_token' => Str::random(80)
-            ]);
+            if($user->first()){
+
+                $user->first()->update([
+                    'account' => $data[3],
+                    'password' => Hash::make($data[5]),
+                    'username' => $data[4],
+                    'classnumber' => $data[2],
+                    'class_id' => $classId->id,
+                    'api_token' => Str::random(80)
+                ]);
+            }else {
+                User::create([
+                    'account' => $data[3],
+                    'password' => Hash::make($data[5]),
+                    'username' => $data[4],
+                    'classnumber' => $data[2],
+                    'class_id' => $classId->id,
+                    'api_token' => Str::random(80)
+                ]);
+            }
         }
 
         Storage::disk('public')->delete($filename);

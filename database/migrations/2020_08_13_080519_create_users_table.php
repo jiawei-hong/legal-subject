@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('permission')->default('學生');
             $table->bigInteger('class_id')->unsigned()->index();
-            $table->foreign('class_id')->references('id')->on('class');
+            $table->foreign('class_id')->references('id')->on('class')->onDelete('CASCADE');
             $table->timestamps();
         });
 
