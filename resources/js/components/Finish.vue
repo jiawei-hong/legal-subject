@@ -20,11 +20,7 @@
                                 <h5 class="card-title">答對率</h5>
                                 <p class="card-text">
                                     {{
-                                        (recordData[currentIndex].correct /
-                                            (recordData[currentIndex].correct +
-                                                recordData[currentIndex].incorrect)) *
-                                        100 +
-                                        "%"
+                                        (recordData[currentIndex].correct / (recordData[currentIndex].correct + recordData[currentIndex].incorrect) * 100).toFixed(2) + "%"
                                     }}
                                 </p>
                             </div>
@@ -37,11 +33,7 @@
                                 <h5 class="card-title">答錯率</h5>
                                 <p class="card-text">
                                     {{
-                                        (recordData[currentIndex].incorrect /
-                                            (recordData[currentIndex].correct +
-                                                recordData[currentIndex].incorrect)) *
-                                        100 +
-                                        "%"
+                                        ((recordData[currentIndex].incorrect / (recordData[currentIndex].correct + recordData[currentIndex].incorrect)) * 100).toFixed(2) + "%"
                                     }}
                                 </p>
                             </div>
